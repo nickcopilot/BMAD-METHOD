@@ -1,0 +1,472 @@
+{
+  "test_metadata": {
+    "test_type": "banking_sector_deep_analysis",
+    "symbol": "BID",
+    "sector": "Banks",
+    "bank_name": "Bank for Investment and Development of Vietnam",
+    "timestamp": "20250915_153851",
+    "test_success": false
+  },
+  "analysis_results": {
+    "comprehensive_report": {
+      "symbol": "BID",
+      "sector": "Banks",
+      "report_date": "2025-09-15T15:38:39.686718",
+      "report_type": "comprehensive_analysis",
+      "technical_analysis": {
+        "symbol": "BID",
+        "analysis_date": "2025-09-15T15:38:39.686840",
+        "pattern_analysis": {
+          "symbol": "BID",
+          "price_metrics": {
+            "current_price": 42.2,
+            "52_week_high": 45.1,
+            "52_week_low": 31.2,
+            "position_in_range": 79.13669064748203,
+            "distance_from_high": 6.430155210643012,
+            "distance_from_low": 35.25641025641027
+          },
+          "performance": {
+            "total_return_52w": 6.943740496705519,
+            "annualized_volatility": 23.978561279402324,
+            "sharpe_ratio": 0.2895811977956417,
+            "max_drawdown": -21.938898243925944
+          },
+          "trend_analysis": {
+            "trend_signals": {
+              "short_term": "Bullish",
+              "medium_term": "Bullish",
+              "long_term": "Bullish"
+            },
+            "ma_alignment": "Bullish",
+            "overall_trend": "Bullish"
+          },
+          "support_resistance": {
+            "nearest_resistance": 45.1,
+            "nearest_support": 37.55,
+            "key_resistance_levels": [
+              45.1,
+              42.0,
+              37.7
+            ],
+            "key_support_levels": [
+              37.1,
+              35.0,
+              31.2
+            ]
+          },
+          "momentum": {
+            "rsi": {
+              "current": 44.67005076142134,
+              "status": "Neutral"
+            },
+            "macd": {
+              "macd": 0.3884835467006056,
+              "signal": 0.6297249108419294,
+              "status": "Bearish"
+            },
+            "momentum_score": 22.33502538071067
+          },
+          "seasonal_patterns": {
+            "best_month": "1",
+            "worst_month": "1",
+            "best_day_of_week": "3",
+            "monthly_patterns": {
+              "1": 0.03847365214925313
+            },
+            "weekly_patterns": {
+              "3": 0.03847365214925313
+            }
+          },
+          "trading_patterns": {
+            "trading_frequency": 100.0,
+            "avg_true_range": 1.3464285714285726,
+            "volatility_regime": "High",
+            "consistent_volume": "True"
+          },
+          "commentary": "Trading in middle of 52-week range (79.1%). Moderate performance with 6.9% return. Overall trend is bullish."
+        },
+        "market_maker_analysis": {
+          "symbol": "BID",
+          "error": "single positional indexer is out-of-bounds"
+        }
+      },
+      "eic_analysis": {
+        "symbol": "BID",
+        "sector": "Banks",
+        "analysis_date": "2025-09-15T15:38:46.011655",
+        "eic_score": 65.44282107349552,
+        "investment_grade": "EIC-B+ (Good)",
+        "component_scores": {
+          "environment": {
+            "symbol": "BID",
+            "sector": "Banks",
+            "environment_score": 59.225228837012494,
+            "factors": {
+              "market_trend": {
+                "market_return_6m": 27.19778353200517,
+                "market_volatility": 24.381893127125682,
+                "score": 77.19778353200518
+              },
+              "sector_momentum": {
+                "stock_return_6m": 6.030150753768848,
+                "relative_performance": -21.167632778236324,
+                "score": 7.664734443527351
+              },
+              "liquidity_environment": {
+                "volume_trend": 248.37382586798492,
+                "recent_avg_volume": 11242743.333333334,
+                "score": 100
+              },
+              "sector_specific": {
+                "sector": "Banks",
+                "score": 65,
+                "factors": [
+                  "interest_rate_trend",
+                  "credit_growth",
+                  "regulatory_environment"
+                ]
+              }
+            },
+            "analysis": "Neutral market conditions. strong overall market performance."
+          },
+          "infrastructure": {
+            "symbol": "BID",
+            "sector": "Banks",
+            "infrastructure_score": 65.5,
+            "factors": {
+              "business_model": {
+                "score": 70,
+                "model_type": "Banks",
+                "strengths": [
+                  "recurring_revenue",
+                  "scalability",
+                  "margin_stability"
+                ],
+                "challenges": [
+                  "competition",
+                  "regulatory_risk",
+                  "market_cyclicality"
+                ]
+              },
+              "financial_health": {
+                "score": 65,
+                "liquidity": "adequate",
+                "leverage": "moderate",
+                "profitability": "stable",
+                "cash_flow": "positive"
+              },
+              "management_quality": {
+                "score": 60,
+                "execution_consistency": "good",
+                "strategic_vision": "clear",
+                "capital_allocation": "efficient"
+              }
+            },
+            "analysis": "Adequate infrastructure."
+          },
+          "competitiveness": {
+            "symbol": "BID",
+            "sector": "Banks",
+            "competitiveness_score": 72.62996993513721,
+            "factors": {
+              "market_presence": {
+                "score": 65,
+                "market_position": "strong",
+                "brand_recognition": "high",
+                "distribution_network": "extensive"
+              },
+              "competitive_advantage": {
+                "score": 55.433233117124054,
+                "total_return": 6.943740496705519,
+                "volatility": 1.51050737958146,
+                "advantage_type": "cost_leadership"
+              },
+              "adaptability": {
+                "score": 100,
+                "volume_growth": 341.5021539915566,
+                "price_momentum": 0.11862396204034287,
+                "innovation_proxy": "high"
+              }
+            },
+            "analysis": "Strong competitive position."
+          }
+        },
+        "weights_used": {
+          "environment": 0.35,
+          "infrastructure": 0.35,
+          "competitiveness": 0.3
+        },
+        "executive_summary": {
+          "overall_assessment": "BID receives an EIC score of 65.4",
+          "key_strengths": [
+            "Strong business fundamentals",
+            "Competitive advantage"
+          ],
+          "key_weaknesses": [],
+          "recommendation": "Buy - Attractive investment opportunity",
+          "risk_level": "Low"
+        }
+      },
+      "market_maker_analysis": {
+        "symbol": "BID",
+        "error": "'MarketMakerAnalyzer' object has no attribute 'analyze_trading_patterns'"
+      },
+      "company_operations": {
+        "symbol": "BID",
+        "error": "'RangeIndex' object has no attribute 'month'"
+      },
+      "smart_money_tracking": {
+        "symbol": "BID",
+        "smart_money_score": 81.26312050056414,
+        "flow_direction": "Strong Inflow",
+        "confidence_level": "Very High",
+        "indicators": {
+          "volume_analysis": {
+            "large_block_frequency": 11.11111111111111,
+            "volume_price_correlation": 0.5397635889264984,
+            "volume_distribution": {
+              "0.5": 7511900.0,
+              "0.75": 11274450.0,
+              "0.9": 15107580.000000002,
+              "0.95": 16600689.999999998
+            },
+            "score": 79.21040166854715,
+            "interpretation": "High institutional activity"
+          },
+          "price_action": {
+            "return_smoothness": 36.325647253680806,
+            "level_respect": 0.6984126984126984,
+            "score": 100,
+            "pattern": "Institutional price action"
+          },
+          "timing_patterns": {
+            "timing_consistency": 1.0548507468423742,
+            "volume_leads_price": "True",
+            "score": 100,
+            "assessment": "Smart timing patterns"
+          },
+          "accumulation_distribution": {
+            "money_flow_index": 53.067579003516144,
+            "trend": "Neutral",
+            "score": 50,
+            "interpretation": "Smart money neutral detected"
+          }
+        },
+        "key_signals": [
+          "Volume Analysis: High institutional activity",
+          "Timing Patterns: Smart timing patterns"
+        ],
+        "recommended_actions": [
+          "Consider accumulating position on market weakness",
+          "Monitor for institutional buying patterns"
+        ],
+        "monitoring_points": [
+          "Monitor consistent timing patterns for institutional activity"
+        ]
+      },
+      "trading_signals": {
+        "primary_signals": [],
+        "secondary_signals": [],
+        "risk_signals": [],
+        "entry_points": [],
+        "exit_points": [],
+        "position_sizing": {},
+        "time_horizon": "",
+        "overall_signal_strength": 0,
+        "entry_levels": [
+          {
+            "level": 37.55,
+            "type": "support_bounce",
+            "confidence": "medium"
+          }
+        ],
+        "exit_levels": [],
+        "stop_loss": 36.4235,
+        "targets": [
+          {
+            "level": 45.1,
+            "type": "resistance_target",
+            "probability": "high"
+          }
+        ]
+      },
+      "composite_score": {
+        "composite_score": 54.63284632204866,
+        "investment_grade": "B - Hold",
+        "component_scores": {
+          "technical": 50,
+          "eic": 65.44282107349552,
+          "market_maker": 50,
+          "operations": 50
+        },
+        "weights_used": {
+          "technical_analysis": 0.25,
+          "eic_analysis": 0.3,
+          "market_maker_analysis": 0.25,
+          "fundamental_proxy": 0.2
+        },
+        "score_interpretation": "Mixed signals - requires careful consideration and monitoring"
+      },
+      "executive_summary": {
+        "investment_thesis": "BID (Banks) presents a b - hold opportunity",
+        "composite_score": 54.63284632204866,
+        "investment_grade": "B - Hold",
+        "key_insights": [],
+        "primary_catalysts": [],
+        "key_risks": [],
+        "recommended_action": "Hold - Monitor for improvement",
+        "time_horizon": "Medium-term (3-6 months)",
+        "confidence_level": "Medium"
+      },
+      "risk_assessment": {
+        "technical_risks": [],
+        "fundamental_risks": [],
+        "market_structure_risks": [],
+        "overall_risk_level": "Low",
+        "risk_score": 0
+      },
+      "time_sensitive_factors": {
+        "urgent_factors": [],
+        "medium_term_factors": [],
+        "long_term_factors": [],
+        "monitoring_schedule": {}
+      }
+    },
+    "smart_signals": {
+      "symbol": "BID",
+      "error": "'numpy.int64' object has no attribute 'days'"
+    },
+    "eic_analysis": {
+      "symbol": "BID",
+      "sector": "Banks",
+      "analysis_date": "2025-09-15T15:38:51.052225",
+      "eic_score": 65.44282107349552,
+      "investment_grade": "EIC-B+ (Good)",
+      "component_scores": {
+        "environment": {
+          "symbol": "BID",
+          "sector": "Banks",
+          "environment_score": 59.225228837012494,
+          "factors": {
+            "market_trend": {
+              "market_return_6m": 27.19778353200517,
+              "market_volatility": 24.381893127125682,
+              "score": 77.19778353200518
+            },
+            "sector_momentum": {
+              "stock_return_6m": 6.030150753768848,
+              "relative_performance": -21.167632778236324,
+              "score": 7.664734443527351
+            },
+            "liquidity_environment": {
+              "volume_trend": 248.37382586798492,
+              "recent_avg_volume": 11242743.333333334,
+              "score": 100
+            },
+            "sector_specific": {
+              "sector": "Banks",
+              "score": 65,
+              "factors": [
+                "interest_rate_trend",
+                "credit_growth",
+                "regulatory_environment"
+              ]
+            }
+          },
+          "analysis": "Neutral market conditions. strong overall market performance."
+        },
+        "infrastructure": {
+          "symbol": "BID",
+          "sector": "Banks",
+          "infrastructure_score": 65.5,
+          "factors": {
+            "business_model": {
+              "score": 70,
+              "model_type": "Banks",
+              "strengths": [
+                "recurring_revenue",
+                "scalability",
+                "margin_stability"
+              ],
+              "challenges": [
+                "competition",
+                "regulatory_risk",
+                "market_cyclicality"
+              ]
+            },
+            "financial_health": {
+              "score": 65,
+              "liquidity": "adequate",
+              "leverage": "moderate",
+              "profitability": "stable",
+              "cash_flow": "positive"
+            },
+            "management_quality": {
+              "score": 60,
+              "execution_consistency": "good",
+              "strategic_vision": "clear",
+              "capital_allocation": "efficient"
+            }
+          },
+          "analysis": "Adequate infrastructure."
+        },
+        "competitiveness": {
+          "symbol": "BID",
+          "sector": "Banks",
+          "competitiveness_score": 72.62996993513721,
+          "factors": {
+            "market_presence": {
+              "score": 65,
+              "market_position": "strong",
+              "brand_recognition": "high",
+              "distribution_network": "extensive"
+            },
+            "competitive_advantage": {
+              "score": 55.433233117124054,
+              "total_return": 6.943740496705519,
+              "volatility": 1.51050737958146,
+              "advantage_type": "cost_leadership"
+            },
+            "adaptability": {
+              "score": 100,
+              "volume_growth": 341.5021539915566,
+              "price_momentum": 0.11862396204034287,
+              "innovation_proxy": "high"
+            }
+          },
+          "analysis": "Strong competitive position."
+        }
+      },
+      "weights_used": {
+        "environment": 0.35,
+        "infrastructure": 0.35,
+        "competitiveness": 0.3
+      },
+      "executive_summary": {
+        "overall_assessment": "BID receives an EIC score of 65.4",
+        "key_strengths": [
+          "Strong business fundamentals",
+          "Competitive advantage"
+        ],
+        "key_weaknesses": [],
+        "recommendation": "Buy - Attractive investment opportunity",
+        "risk_level": "Low"
+      }
+    },
+    "mm_analysis": {
+      "symbol": "BID",
+      "error": "'MarketMakerAnalyzer' object has no attribute 'analyze_trading_patterns'"
+    }
+  },
+  "key_insights": [
+    "Overall Investment: 54.6/100 (B - Hold)",
+    "EIC Analysis: 65.4/100 (EIC-B+ (Good))"
+  ],
+  "test_modules": [
+    "\u2705 Comprehensive Analysis",
+    "\u274c Smart Money Signals",
+    "\u2705 EIC Framework",
+    "\u274c Market Maker Analysis"
+  ]
+}
