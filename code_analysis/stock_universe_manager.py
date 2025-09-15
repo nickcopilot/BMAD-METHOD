@@ -213,8 +213,8 @@ class VietnamStockUniverse:
         failed_stocks = []
 
         # Analyze liquidity for each stock (with rate limiting)
-        for i, symbol in enumerate(all_stocks[:100]):  # Limit to first 100 for testing
-            logging.info(f"Analyzing {symbol} ({i+1}/{min(100, len(all_stocks))})")
+        for i, symbol in enumerate(all_stocks):  # Process all discovered stocks
+            logging.info(f"Analyzing {symbol} ({i+1}/{len(all_stocks)})")
 
             liquidity_analysis = self.analyze_liquidity(symbol)
 
@@ -255,7 +255,7 @@ class VietnamStockUniverse:
             'liquid_stocks': liquid_stocks,
             'failed_stocks': failed_stocks,
             'total_liquid': total_liquid,
-            'total_analyzed': len(all_stocks[:100]),
+            'total_analyzed': len(all_stocks),
             'filters_used': self.liquidity_filters,
             'created_at': datetime.now().isoformat()
         }
