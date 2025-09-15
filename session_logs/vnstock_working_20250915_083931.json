@@ -1,0 +1,122 @@
+{
+  "Securities": [
+    {
+      "symbol": "SSI",
+      "company_name": "SSI",
+      "current_price": 42.2,
+      "previous_close": 41.9,
+      "change_pct": 0.7159904534606307,
+      "volume": 40521000,
+      "high": 42.65,
+      "low": 41.45,
+      "date": "18",
+      "data_points": 19,
+      "success": true,
+      "eic_score": 5.4
+    },
+    {
+      "symbol": "VCI",
+      "company_name": "VCI",
+      "current_price": 45.15,
+      "previous_close": 44.3,
+      "change_pct": 1.918735891647859,
+      "volume": 6083800,
+      "high": 45.35,
+      "low": 44.6,
+      "date": "18",
+      "data_points": 19,
+      "success": true,
+      "eic_score": 5.4
+    }
+  ],
+  "Banks": [
+    {
+      "symbol": "VCB",
+      "company_name": "VCB",
+      "current_price": 65.8,
+      "previous_close": 65.8,
+      "change_pct": 0.0,
+      "volume": 5367400,
+      "high": 66.0,
+      "low": 65.5,
+      "date": "18",
+      "data_points": 19,
+      "success": true,
+      "eic_score": 4.6
+    },
+    {
+      "symbol": "BID",
+      "company_name": "BID",
+      "current_price": 42.2,
+      "previous_close": 40.95,
+      "change_pct": 3.0525030525030523,
+      "volume": 7330300,
+      "high": 42.2,
+      "low": 41.05,
+      "date": "18",
+      "data_points": 19,
+      "success": true,
+      "eic_score": 5.8
+    }
+  ],
+  "Real_Estate": [
+    {
+      "symbol": "VHM",
+      "company_name": "VHM",
+      "current_price": 104.5,
+      "previous_close": 105.5,
+      "change_pct": -0.9478672985781991,
+      "volume": 2942600,
+      "high": 104.7,
+      "low": 102.5,
+      "date": "18",
+      "data_points": 19,
+      "success": true,
+      "eic_score": 4.6
+    },
+    {
+      "symbol": "VIC",
+      "company_name": "VIC",
+      "current_price": 137.8,
+      "previous_close": 137.8,
+      "change_pct": 0.0,
+      "volume": 2142000,
+      "high": 137.8,
+      "low": 134.8,
+      "date": "18",
+      "data_points": 19,
+      "success": true,
+      "eic_score": 4.6
+    }
+  ],
+  "Steel": [
+    {
+      "symbol": "HPG",
+      "company_name": "HPG",
+      "current_price": 30.35,
+      "previous_close": 30.0,
+      "change_pct": 1.1666666666666714,
+      "volume": 88920500,
+      "high": 30.85,
+      "low": 30.1,
+      "date": "18",
+      "data_points": 19,
+      "success": true,
+      "eic_score": 5.4
+    },
+    {
+      "symbol": "HSG",
+      "company_name": "HSG",
+      "current_price": 20.7,
+      "previous_close": 20.5,
+      "change_pct": 0.9756097560975575,
+      "volume": 13733500,
+      "high": 21.2,
+      "low": 20.55,
+      "date": "18",
+      "data_points": 19,
+      "success": true,
+      "eic_score": 5.4
+    }
+  ]
+}

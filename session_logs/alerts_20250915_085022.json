@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-09-15T08:50:22.008678",
+  "total_alerts": 2,
+  "high_priority": 0,
+  "medium_priority": 1,
+  "low_priority": 1,
+  "alerts": [
+    {
+      "type": "PRICE_DROP",
+      "symbol": "VHM",
+      "current_price": 104000,
+      "change_pct": -0.95,
+      "message": "VHM dropped 0.95% today",
+      "severity": "LOW",
+      "recommendation": "Monitor situation and wait for stabilization",
+      "timestamp": "2025-09-15T08:50:22.008585"
+    },
+    {
+      "type": "VOLUME_SPIKE",
+      "symbol": "BID",
+      "current_volume": 2100000,
+      "volume_ratio": 2.4,
+      "message": "BID volume 2.4x higher than average",
+      "severity": "MEDIUM",
+      "recommendation": "Monitor for news or announcements",
+      "timestamp": "2025-09-15T08:50:22.008599"
+    }
+  ]
+}

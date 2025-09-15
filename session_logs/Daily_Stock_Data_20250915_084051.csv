@@ -1,0 +1,5 @@
+Date,Symbol,Company_Name,Sector,Current_Price,Previous_Close,Change_Pct,Volume,High,Low,EIC_Score,Economy_Score,Industry_Score,Company_Score,Signal,Last_Updated
+2024-09-15,VCB,Vietcombank,Banks,66000,66000,0.0,1500000,67000,65500,5.2,5.0,5.5,5.0,HOLD,2024-09-15 08:39:31
+2024-09-15,BID,BIDV,Banks,42000,40800,3.05,2100000,42500,40500,5.8,5.0,7.0,5.0,HOLD,2024-09-15 08:39:31
+2024-09-15,SSI,SSI Securities,Securities,42000,41700,0.72,980000,42300,41500,5.4,5.0,6.0,5.0,HOLD,2024-09-15 08:39:31
+2024-09-15,HPG,Hoa Phat Group,Steel,30000,29650,1.17,1800000,30200,29500,5.4,5.0,6.0,5.0,HOLD,2024-09-15 08:39:31

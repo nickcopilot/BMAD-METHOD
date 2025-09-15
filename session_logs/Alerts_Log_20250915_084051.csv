@@ -1,0 +1,3 @@
+Timestamp,Alert_Type,Symbol,Alert_Message,Trigger_Value,Current_Value,Severity,Status,Action_Taken,Notes
+2024-09-15 08:39:31,Price_Drop,VHM,Price dropped >2% in 1 day,-2.0,-0.95,Medium,Active,Email_Sent,Monitor for further decline
+2024-09-15 07:15:22,Volume_Spike,BID,Volume >200% of average,200.0,240.0,High,Active,Email_Sent,Potential news catalyst

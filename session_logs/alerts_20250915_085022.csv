@@ -1,0 +1,3 @@
+type,symbol,current_price,change_pct,message,severity,recommendation,timestamp,current_volume,volume_ratio
+PRICE_DROP,VHM,104000.0,-0.95,VHM dropped 0.95% today,LOW,Monitor situation and wait for stabilization,2025-09-15T08:50:22.008585,,
+VOLUME_SPIKE,BID,,,BID volume 2.4x higher than average,MEDIUM,Monitor for news or announcements,2025-09-15T08:50:22.008599,2100000.0,2.4

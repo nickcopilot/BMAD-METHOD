@@ -1,0 +1,47 @@
+[
+  {
+    "symbol": "SSI",
+    "quantity": 100,
+    "avg_price": 40.09,
+    "current_price": 42.2,
+    "market_value": 4220.0,
+    "unrealized_pnl": 210.99999999999994,
+    "unrealized_pnl_pct": 5.26,
+    "eic_score": 5.4,
+    "alert_triggers": {
+      "price_drop_5pct": 40.09,
+      "eic_score_change": 1.0,
+      "volume_spike": 2.0
+    }
+  },
+  {
+    "symbol": "VCI",
+    "quantity": 100,
+    "avg_price": 42.8925,
+    "current_price": 45.15,
+    "market_value": 4515.0,
+    "unrealized_pnl": 225.75000000000003,
+    "unrealized_pnl_pct": 5.26,
+    "eic_score": 5.4,
+    "alert_triggers": {
+      "price_drop_5pct": 42.8925,
+      "eic_score_change": 1.0,
+      "volume_spike": 2.0
+    }
+  },
+  {
+    "symbol": "VCB",
+    "quantity": 100,
+    "avg_price": 62.50999999999999,
+    "current_price": 65.8,
+    "market_value": 6580.0,
+    "unrealized_pnl": 329.0000000000006,
+    "unrealized_pnl_pct": 5.26,
+    "eic_score": 4.6,
+    "alert_triggers": {
+      "price_drop_5pct": 62.50999999999999,
+      "eic_score_change": 1.0,
+      "volume_spike": 2.0
+    }
+  }
+]

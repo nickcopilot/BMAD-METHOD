@@ -1,0 +1,42 @@
+[
+  {
+    "date": "2025-09-15",
+    "sector": "Securities",
+    "avg_change_pct": 1.66,
+    "avg_eic_score": 6.0,
+    "stocks_count": 4,
+    "top_performer": "VND",
+    "best_eic": "SSI",
+    "last_updated": "2025-09-15T08:52:41.529181"
+  },
+  {
+    "date": "2025-09-15",
+    "sector": "Banks",
+    "avg_change_pct": 1.48,
+    "avg_eic_score": 6.2,
+    "stocks_count": 5,
+    "top_performer": "BID",
+    "best_eic": "BID",
+    "last_updated": "2025-09-15T08:52:41.529198"
+  },
+  {
+    "date": "2025-09-15",
+    "sector": "Real_Estate",
+    "avg_change_pct": -0.24,
+    "avg_eic_score": 5.8,
+    "stocks_count": 4,
+    "top_performer": "DXG",
+    "best_eic": "DXG",
+    "last_updated": "2025-09-15T08:52:41.529210"
+  },
+  {
+    "date": "2025-09-15",
+    "sector": "Steel",
+    "avg_change_pct": 1.36,
+    "avg_eic_score": 6.1,
+    "stocks_count": 4,
+    "top_performer": "TLH",
+    "best_eic": "TLH",
+    "last_updated": "2025-09-15T08:52:41.529221"
+  }
+]
