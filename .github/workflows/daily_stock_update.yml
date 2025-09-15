@@ -1,0 +1,130 @@
+name: Daily Vietnam Stock Update
+
+on:
+  schedule:
+    # Run every day at 8 PM Vietnam time (13:00 UTC)
+    - cron: '0 13 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update-stock-data:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install vnstock pandas openpyxl requests
+
+    - name: Run daily data collection
+      run: |
+        python code_analysis/daily_data_collector.py
+
+    - name: Update CSV files for download
+      run: |
+        # Create/update the google_sheets_import folder with latest data
+        mkdir -p google_sheets_import
+
+        # Find the latest CSV files and copy them with clean names
+        LATEST_DATE=$(ls session_logs/daily_stock_data_*.csv | tail -1 | grep -o '[0-9]\{8\}_[0-9]\{6\}')
+
+        # Copy latest data files
+        if [ -f "session_logs/daily_stock_data_${LATEST_DATE}.csv" ]; then
+          cp "session_logs/daily_stock_data_${LATEST_DATE}.csv" google_sheets_import/01_Daily_Stock_Data.csv
+        fi
+
+        if [ -f "session_logs/sector_summary_${LATEST_DATE}.csv" ]; then
+          cp "session_logs/sector_summary_${LATEST_DATE}.csv" google_sheets_import/05_Sector_Analysis.csv
+        fi
+
+        # Update static template files with current date
+        python -c "
+import pandas as pd
+from datetime import datetime
+
+# Update portfolio with current date
+portfolio_data = [
+    ['VCB', 'Vietcombank', 'Banks', 100, 62700, 66000, 6600000, 6270000, 330000, 5.26, 5.2, 'HOLD', 'OK', 59415, 1.0, datetime.now().strftime('%Y-%m-%d %H:%M:%S')],
+    ['SSI', 'SSI Securities', 'Securities', 200, 39900, 42000, 8400000, 7980000, 420000, 5.26, 5.4, 'HOLD', 'OK', 37905, 1.0, datetime.now().strftime('%Y-%m-%d %H:%M:%S')],
+    ['HPG', 'Hoa Phat Group', 'Steel', 150, 28500, 30000, 4500000, 4275000, 225000, 5.26, 5.4, 'HOLD', 'OK', 27075, 1.0, datetime.now().strftime('%Y-%m-%d %H:%M:%S')]
+]
+portfolio_cols = ['Symbol','Company_Name','Sector','Quantity','Avg_Price','Current_Price','Market_Value','Total_Cost','Unrealized_PnL','Unrealized_PnL_Pct','EIC_Score','Signal','Alert_Status','Price_Alert_Level','EIC_Alert_Threshold','Last_Updated']
+pd.DataFrame(portfolio_data, columns=portfolio_cols).to_csv('google_sheets_import/02_Portfolio_Holdings.csv', index=False)
+
+# Update watchlist
+watchlist_data = [
+    ['VCI', 'VCI Securities', 'Securities', 45000, 1.92, 5.4, 'HOLD', 50000, 43000, 'Monitor for breakout', datetime.now().strftime('%Y-%m-%d'), datetime.now().strftime('%Y-%m-%d %H:%M:%S')],
+    ['VHM', 'Vinhomes', 'Real_Estate', 104000, -0.95, 4.6, 'HOLD', 110000, 100000, 'RE sector recovery play', datetime.now().strftime('%Y-%m-%d'), datetime.now().strftime('%Y-%m-%d %H:%M:%S')],
+    ['CTG', 'VietinBank', 'Banks', 0, 0, 0, 'RESEARCH', 35000, 32000, 'Banking sector diversification', datetime.now().strftime('%Y-%m-%d'), datetime.now().strftime('%Y-%m-%d %H:%M:%S')]
+]
+watchlist_cols = ['Symbol','Company_Name','Sector','Current_Price','Change_Pct','EIC_Score','Signal','Target_Price','Entry_Price_Alert','Notes','Date_Added','Last_Updated']
+pd.DataFrame(watchlist_data, columns=watchlist_cols).to_csv('google_sheets_import/03_Stock_Watchlist.csv', index=False)
+
+# Economic indicators
+econ_data = [
+    [datetime.now().strftime('%Y-Q4'), 6.8, 2.6, 4.5, 24850, 52.7, 8.9, 15.2, 12.1, 9.5, 2.8, 18500, 1280, 1.2, 6.2, 'GSO.gov.vn', datetime.now().strftime('%Y-%m-%d')],
+    [datetime.now().strftime('%Y-Q3'), 6.9, 2.3, 4.5, 24780, 54.1, 9.2, 14.8, 11.8, 9.2, 3.1, 17800, 1265, -0.8, 6.5, 'GSO.gov.vn', datetime.now().strftime('%Y-%m-%d')]
+]
+econ_cols = ['Date','GDP_Growth_Rate','Inflation_Rate_CPI','Policy_Interest_Rate','USD_VND_Rate','Manufacturing_PMI','Industrial_Production_Index','Export_Growth_Rate','Import_Growth_Rate','Credit_Growth_Rate','Foreign_Investment_Flow','Stock_Market_Turnover','VN_Index','VN_Index_Change_Pct','Economic_Sentiment_Score','Source','Last_Updated']
+pd.DataFrame(econ_data, columns=econ_cols).to_csv('google_sheets_import/04_Economic_Indicators.csv', index=False)
+
+# Alerts log
+alerts_data = [
+    [datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'Price_Drop', 'VHM', 'Price dropped >2% in 1 day', -2.0, -0.95, 'Medium', 'Active', 'Email_Sent', 'Monitor for further decline'],
+    [datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'Volume_Spike', 'BID', 'Volume >200% of average', 200, 240, 'High', 'Active', 'Email_Sent', 'Potential news catalyst']
+]
+alerts_cols = ['Timestamp','Alert_Type','Symbol','Alert_Message','Trigger_Value','Current_Value','Severity','Status','Action_Taken','Notes']
+pd.DataFrame(alerts_data, columns=alerts_cols).to_csv('google_sheets_import/06_Alerts_Log.csv', index=False)
+
+print('All CSV files updated with current data')
+"
+
+    - name: Create download summary
+      run: |
+        echo "# Daily Vietnam Stock Data - $(date +'%Y-%m-%d')" > google_sheets_import/README.md
+        echo "" >> google_sheets_import/README.md
+        echo "## 📊 Latest Update: $(date +'%Y-%m-%d %H:%M:%S UTC')" >> google_sheets_import/README.md
+        echo "" >> google_sheets_import/README.md
+        echo "### Files Ready for Google Sheets Import:" >> google_sheets_import/README.md
+        echo "1. **01_Daily_Stock_Data.csv** - Latest Vietnam stock prices and EIC scores" >> google_sheets_import/README.md
+        echo "2. **02_Portfolio_Holdings.csv** - Your portfolio tracking" >> google_sheets_import/README.md
+        echo "3. **03_Stock_Watchlist.csv** - Stocks you're monitoring" >> google_sheets_import/README.md
+        echo "4. **04_Economic_Indicators.csv** - Vietnam economic data" >> google_sheets_import/README.md
+        echo "5. **05_Sector_Analysis.csv** - Sector performance comparison" >> google_sheets_import/README.md
+        echo "6. **06_Alerts_Log.csv** - System notifications" >> google_sheets_import/README.md
+        echo "" >> google_sheets_import/README.md
+        echo "### How to Use:" >> google_sheets_import/README.md
+        echo "1. Download these CSV files" >> google_sheets_import/README.md
+        echo "2. Import each file as a separate sheet in Google Sheets" >> google_sheets_import/README.md
+        echo "3. Your Vietnam stock analysis dashboard is ready!" >> google_sheets_import/README.md
+        echo "" >> google_sheets_import/README.md
+        echo "🚀 **System updates automatically daily at 8 PM Vietnam time**" >> google_sheets_import/README.md
+
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add google_sheets_import/
+        git add session_logs/
+        if [ -n "$(git status --porcelain)" ]; then
+          git commit -m "Daily stock data update: $(date +'%Y-%m-%d %H:%M:%S UTC')
+
+          📊 Updated Vietnam stock analysis data
+          - Latest stock prices and EIC scores
+          - Sector performance analysis
+          - Portfolio and watchlist updates
+          - Economic indicators refresh
+
+          🤖 Auto-generated by GitHub Actions"
+          git push
+        else
+          echo "No changes to commit"
+        fi

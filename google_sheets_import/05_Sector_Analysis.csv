@@ -1,0 +1,5 @@
+Date,Sector,Avg_Price_Change_Pct,Avg_Volume_Change_Pct,Avg_EIC_Score,Top_Performer,Top_Performer_Change,Worst_Performer,Worst_Performer_Change,Sector_PE_Ratio,Sector_PB_Ratio,Market_Cap_Billion_VND,Foreign_Ownership_Pct,Sector_Momentum_Score,Sector_Signal,Key_News_Summary,Last_Updated
+2024-09-15,Banks,1.53,15.2,5.2,BID,3.05,CTG,-1.2,8.2,1.1,850,47.5,6.1,HOLD,Credit growth remains strong,2024-09-15 08:39:31
+2024-09-15,Securities,1.32,22.8,5.4,VCI,1.92,HCM,-0.5,12.5,1.8,180,35.2,5.9,HOLD,Trading volumes increasing,2024-09-15 08:39:31
+2024-09-15,Real_Estate,-0.47,-8.3,4.6,DXG,2.1,VHM,-0.95,15.8,1.2,620,28.9,4.2,HOLD,Mixed signals in sector,2024-09-15 08:39:31
+2024-09-15,Steel,1.07,18.5,5.4,HPG,1.17,NKG,0.2,9.8,0.9,320,42.1,5.8,HOLD,Infrastructure demand rising,2024-09-15 08:39:31

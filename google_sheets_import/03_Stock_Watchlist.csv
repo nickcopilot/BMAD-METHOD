@@ -1,0 +1,4 @@
+Symbol,Company_Name,Sector,Current_Price,Change_Pct,EIC_Score,Signal,Target_Price,Entry_Price_Alert,Notes,Date_Added,Last_Updated
+VCI,VCI Securities,Securities,45000,1.92,5.4,HOLD,50000,43000,Monitor for breakout,2024-09-15,2024-09-15 08:39:31
+VHM,Vinhomes,Real_Estate,104000,-0.95,4.6,HOLD,110000,100000,RE sector recovery play,2024-09-15,2024-09-15 08:39:31
+CTG,VietinBank,Banks,0,0.0,0.0,RESEARCH,35000,32000,Banking sector diversification,2024-09-15,2024-09-15 08:39:31

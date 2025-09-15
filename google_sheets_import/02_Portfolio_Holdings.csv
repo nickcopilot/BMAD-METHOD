@@ -1,0 +1,4 @@
+Symbol,Company_Name,Sector,Quantity,Avg_Price,Current_Price,Market_Value,Total_Cost,Unrealized_PnL,Unrealized_PnL_Pct,EIC_Score,Signal,Alert_Status,Price_Alert_Level,EIC_Alert_Threshold,Last_Updated
+VCB,Vietcombank,Banks,100,62700,66000,6600000,6270000,330000,5.26,5.2,HOLD,OK,59415,1.0,2024-09-15 08:39:31
+SSI,SSI Securities,Securities,200,39900,42000,8400000,7980000,420000,5.26,5.4,HOLD,OK,37905,1.0,2024-09-15 08:39:31
+HPG,Hoa Phat Group,Steel,150,28500,30000,4500000,4275000,225000,5.26,5.4,HOLD,OK,27075,1.0,2024-09-15 08:39:31
