@@ -852,8 +852,16 @@ class SmartMoneySignalSystem:
         net_price_impact = 0
 
         for i in range(len(high_volume_days) - 1):
-            if (high_volume_days.index[i+1] - high_volume_days.index[i]).days <= 3:
-                clustering_score += 1
+            # Handle both datetime and integer index types
+            index_diff = high_volume_days.index[i+1] - high_volume_days.index[i]
+            if hasattr(index_diff, 'days'):
+                # Datetime index - use .days
+                if index_diff.days <= 3:
+                    clustering_score += 1
+            else:
+                # Integer index - treat as sequential days
+                if index_diff <= 3:
+                    clustering_score += 1
 
         # Net price impact
         for _, day in high_volume_days.iterrows():

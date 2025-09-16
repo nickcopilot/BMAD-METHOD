@@ -505,6 +505,36 @@ class MarketMakerAnalyzer:
 
         return signals
 
+    def analyze_trading_patterns(self, data: pd.DataFrame) -> Dict:
+        """Analyze market maker trading patterns"""
+        # Calculate average true range for volatility assessment
+        data['high_low'] = data['high'] - data['low']
+        data['high_close'] = abs(data['high'] - data['close'].shift())
+        data['low_close'] = abs(data['low'] - data['close'].shift())
+        data['atr'] = data[['high_low', 'high_close', 'low_close']].max(axis=1).rolling(14).mean()
+
+        # Trading frequency
+        trading_days = len(data[data['volume'] > 0])
+        total_days = len(data)
+
+        # Price consistency (measure of smooth moves vs gaps)
+        price_gaps = abs(data['open'] - data['close'].shift())
+        avg_gap = price_gaps.mean()
+        avg_range = data['atr'].mean()
+        price_consistency = 1 - (avg_gap / avg_range) if avg_range > 0 else 0
+
+        # Volume pattern consistency
+        volume_cv = data['volume'].std() / data['volume'].mean() if data['volume'].mean() > 0 else 1
+
+        return {
+            'trading_frequency': trading_days / total_days * 100,
+            'avg_true_range': data['atr'].iloc[-1] if not data['atr'].isna().iloc[-1] else 0,
+            'volatility_regime': 'High' if data['atr'].iloc[-1] > data['atr'].mean() else 'Low',
+            'price_consistency': price_consistency,
+            'volume_consistency': 'High' if volume_cv < 0.5 else 'Medium' if volume_cv < 1.0 else 'Low',
+            'pattern_type': 'Institutional' if price_consistency > 0.7 and volume_cv < 0.8 else 'Retail'
+        }
+
     # Helper methods
 
     def calculate_mm_efficiency_score(self, spread: float, consistency: float, volatility: float) -> float:
