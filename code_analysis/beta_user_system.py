@@ -157,24 +157,24 @@ class BetaUserManager:
             beta_code = self.generate_beta_code()
             hashed_password = self.hash_password(password)
 
-            # Insert new user
+            # Insert new user (auto-activated for production)
             cursor.execute('''
                 INSERT INTO beta_users
-                (user_id, email, name, hashed_password, role, experience, portfolio_size, beta_code, referral_code)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (user_id, email, name, hashed_password, role, experience, portfolio_size, beta_code, referral_code, is_active)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
             ''', (user_id, email, name, hashed_password, role, experience, portfolio_size, beta_code, referral_code))
 
             conn.commit()
             conn.close()
 
-            # Send welcome email
+            # Send welcome email (placeholder - logs only)
             self.send_welcome_email(email, name, beta_code)
 
             return {
                 'success': True,
                 'user_id': user_id,
                 'beta_code': beta_code,
-                'message': 'Registration successful! Check your email for beta access instructions.'
+                'message': 'Registration successful! You can now login and access the system immediately.'
             }
 
         except Exception as e:
@@ -273,7 +273,7 @@ class BetaUserManager:
 
             cursor.execute('''
                 SELECT user_id, email, name, role, experience, portfolio_size,
-                       signup_date, last_active, is_active
+                       signup_date, last_active, is_active, beta_code
                 FROM beta_users
                 ORDER BY signup_date DESC
             ''')
@@ -293,6 +293,7 @@ class BetaUserManager:
                     'created_at': row[6],
                     'last_login': row[7],
                     'approved': row[8],  # Using is_active as approved
+                    'beta_code': row[9],
                     'referral_source': 'direct'  # Default value for compatibility
                 })
 
@@ -494,9 +495,18 @@ class BetaUserInterface:
                     if result['success']:
                         st.success(result['message'])
                         st.info(f"Your beta access code: `{result['beta_code']}`")
+
+                        # Auto-login the user after registration
+                        st.session_state.beta_user_id = result['user_id']
+                        st.session_state.beta_user_name = name
+                        st.session_state.authenticated = True
+                        st.session_state.user_id = result['user_id']
+
                         st.balloons()
+                        return True  # Signal successful registration and login
                     else:
                         st.error(result['error'])
+        return False  # Signal no registration occurred
 
     def render_beta_login(self):
         """Render beta user login"""
@@ -512,10 +522,13 @@ class BetaUserInterface:
                 if result['success']:
                     st.session_state.beta_user_id = result['user_id']
                     st.session_state.beta_user_name = result['name']
+                    st.session_state.authenticated = True
+                    st.session_state.user_id = result['user_id']
                     st.success(f"Welcome back, {result['name']}!")
-                    st.rerun()
+                    return True  # Signal successful login
                 else:
                     st.error(result['error'])
+        return False  # Signal no login occurred
 
     def render_beta_dashboard(self, user_id: str):
         """Render beta user dashboard"""

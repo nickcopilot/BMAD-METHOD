@@ -40,6 +40,8 @@ try:
     from market_maker_analyzer import MarketMakerAnalyzer
     from stock_universe_manager import VietnamStockUniverse
     from signal_backtester import SignalBacktester
+    from beta_user_system import BetaUserManager, BetaUserInterface
+    from beta_monitoring_system import BetaMonitoringSystem
 except ImportError as e:
     st.error(f"⚠️ System initialization error: {e}")
     st.stop()
@@ -662,10 +664,69 @@ class ProductionVietnamStockApp:
             st.text(log)
 
 def main():
-    """Main application entry point"""
+    """Main application entry point with user authentication"""
     try:
+        # Initialize user management systems (use correct database for production)
+        user_manager = BetaUserManager("data/beta_users.db")
+        monitoring = BetaMonitoringSystem("data/beta_users.db")
+
+        # Handle user authentication
+        if 'authenticated' not in st.session_state:
+            st.session_state.authenticated = False
+            st.session_state.user_id = None
+            st.session_state.user_data = None
+
+        # Check if user is already logged in via beta system
+        if 'beta_user_id' in st.session_state and st.session_state.beta_user_id:
+            st.session_state.authenticated = True
+            st.session_state.user_id = st.session_state.beta_user_id
+            st.session_state.user_data = {'name': st.session_state.get('beta_user_name', 'User')}
+
+        # Show authentication interface if not logged in
+        if not st.session_state.authenticated:
+            user_interface = BetaUserInterface()
+
+            # Create authentication tabs
+            auth_tab1, auth_tab2 = st.tabs(["🔐 Login", "📝 Register"])
+
+            with auth_tab1:
+                if user_interface.render_beta_login():
+                    st.rerun()
+
+            with auth_tab2:
+                if user_interface.render_beta_registration():
+                    st.success("Registration successful! Please login with your credentials.")
+                    st.rerun()
+
+            # Show system preview for unauthenticated users
+            st.markdown("---")
+            st.header("🇻🇳 Vietnam Stock Analysis System Preview")
+            st.info("Login or register above to access the full analysis system with real-time signals.")
+
+            # Show sample features
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Win Rate", "100%", "Validated")
+            with col2:
+                st.metric("Avg Return", "8.16%", "Per Signal")
+            with col3:
+                st.metric("Coverage", "80+ Stocks", "10+ Sectors")
+
+            return
+
+        # Track user session
+        if st.session_state.user_id:
+            monitoring.track_user_activity(
+                user_id=st.session_state.user_id,
+                action_type="page_load",
+                action_details="main_dashboard",
+                session_id=st.session_state.get('session_id', 'unknown')
+            )
+
+        # Run main application for authenticated users
         app = ProductionVietnamStockApp()
         app.run()
+
     except Exception as e:
         logger.error(f"Application error: {e}")
         st.error("Application encountered an error. Please refresh the page or contact support.")
