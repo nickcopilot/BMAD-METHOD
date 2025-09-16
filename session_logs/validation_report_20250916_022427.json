@@ -1,0 +1,58 @@
+{
+  "backtest_summary": {
+    "symbols_tested": 6,
+    "successful_backtests": 2,
+    "failed_backtests": 4,
+    "total_signals_generated": 10
+  },
+  "overall_performance": {
+    "total_signals": 10,
+    "successful_signals": 10,
+    "win_rate": 100.0,
+    "avg_return": 8.16,
+    "median_return": 6.86,
+    "std_return": 4.99,
+    "max_loss": 0,
+    "total_return": 116.75,
+    "avg_holding_period": 14.5,
+    "sharpe_ratio": 1.63,
+    "buy_signals": 10,
+    "sell_signals": 0,
+    "buy_win_rate": 100.0,
+    "sell_win_rate": 0,
+    "risk_adjusted_return": 1.63
+  },
+  "symbol_performance": [
+    {
+      "symbol": "VCB",
+      "win_rate": 100.0,
+      "avg_return": 12.97,
+      "total_signals": 5
+    },
+    {
+      "symbol": "GAS",
+      "win_rate": 100.0,
+      "avg_return": 3.35,
+      "total_signals": 5
+    }
+  ],
+  "best_performer": {
+    "symbol": "VCB",
+    "win_rate": 100.0,
+    "avg_return": 12.97,
+    "total_signals": 5
+  },
+  "worst_performer": {
+    "symbol": "GAS",
+    "win_rate": 100.0,
+    "avg_return": 3.35,
+    "total_signals": 5
+  },
+  "failed_symbols": [
+    "No signals generated for FPT",
+    "No signals generated for VIC",
+    "No signals generated for HPG",
+    "No signals generated for VNM"
+  ],
+  "report_generated": "2025-09-16T02:24:27.296364"
+}

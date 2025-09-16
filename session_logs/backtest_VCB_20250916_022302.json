@@ -1,0 +1,785 @@
+{
+  "symbol": "VCB",
+  "backtest_period": "2025-03-20 00:00:00 to 2025-09-16 00:00:00",
+  "total_signals": 42,
+  "signal_details": [
+    {
+      "signal_date": "2025-06-04 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.6,
+      "exit_price": 62.7,
+      "holding_days": 27,
+      "raw_return": 0.10777385159010602,
+      "net_return": 0.10477385159010602,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-05 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.3,
+      "exit_price": 62.7,
+      "holding_days": 26,
+      "raw_return": 0.11367673179396103,
+      "net_return": 0.11067673179396102,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-06 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.1,
+      "exit_price": 62.7,
+      "holding_days": 25,
+      "raw_return": 0.11764705882352944,
+      "net_return": 0.11464705882352944,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-09 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 55.9,
+      "exit_price": 62.7,
+      "holding_days": 24,
+      "raw_return": 0.12164579606440079,
+      "net_return": 0.11864579606440079,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-10 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 55.9,
+      "exit_price": 62.7,
+      "holding_days": 23,
+      "raw_return": 0.12164579606440079,
+      "net_return": 0.11864579606440079,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-11 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 55.7,
+      "exit_price": 62.7,
+      "holding_days": 22,
+      "raw_return": 0.12567324955116696,
+      "net_return": 0.12267324955116696,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-12 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.0,
+      "exit_price": 62.7,
+      "holding_days": 21,
+      "raw_return": 0.11964285714285719,
+      "net_return": 0.11664285714285719,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-13 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.2,
+      "exit_price": 62.7,
+      "holding_days": 20,
+      "raw_return": 0.11565836298932383,
+      "net_return": 0.11265836298932383,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-16 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.6,
+      "exit_price": 62.8,
+      "holding_days": 30,
+      "raw_return": 0.10954063604240274,
+      "net_return": 0.10654063604240274,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-17 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 57.2,
+      "exit_price": 62.8,
+      "holding_days": 29,
+      "raw_return": 0.09790209790209779,
+      "net_return": 0.09490209790209779,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-18 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.7,
+      "exit_price": 62.8,
+      "holding_days": 28,
+      "raw_return": 0.10758377425044081,
+      "net_return": 0.10458377425044081,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-20 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 57.1,
+      "exit_price": 62.8,
+      "holding_days": 26,
+      "raw_return": 0.09982486865148854,
+      "net_return": 0.09682486865148854,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-23 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.6,
+      "exit_price": 62.8,
+      "holding_days": 25,
+      "raw_return": 0.10954063604240274,
+      "net_return": 0.10654063604240274,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-24 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.6,
+      "exit_price": 62.8,
+      "holding_days": 24,
+      "raw_return": 0.10954063604240274,
+      "net_return": 0.10654063604240274,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-25 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.6,
+      "exit_price": 62.8,
+      "holding_days": 23,
+      "raw_return": 0.10954063604240274,
+      "net_return": 0.10654063604240274,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-26 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.4,
+      "exit_price": 62.8,
+      "holding_days": 22,
+      "raw_return": 0.11347517730496452,
+      "net_return": 0.11047517730496452,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-27 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 56.7,
+      "exit_price": 62.8,
+      "holding_days": 21,
+      "raw_return": 0.10758377425044081,
+      "net_return": 0.10458377425044081,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-06-30 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 57.0,
+      "exit_price": 62.8,
+      "holding_days": 20,
+      "raw_return": 0.10175438596491224,
+      "net_return": 0.09875438596491223,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-01 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 58.2,
+      "exit_price": 63.0,
+      "holding_days": 30,
+      "raw_return": 0.08247422680412365,
+      "net_return": 0.07947422680412365,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-02 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 58.0,
+      "exit_price": 63.0,
+      "holding_days": 29,
+      "raw_return": 0.08620689655172414,
+      "net_return": 0.08320689655172414,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-03 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 57.9,
+      "exit_price": 65.2,
+      "holding_days": 30,
+      "raw_return": 0.12607944732297072,
+      "net_return": 0.12307944732297071,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-04 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 58.4,
+      "exit_price": 65.2,
+      "holding_days": 29,
+      "raw_return": 0.11643835616438364,
+      "net_return": 0.11343835616438364,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-07 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 58.6,
+      "exit_price": 65.2,
+      "holding_days": 28,
+      "raw_return": 0.11262798634812289,
+      "net_return": 0.10962798634812289,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-08 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 59.0,
+      "exit_price": 65.2,
+      "holding_days": 27,
+      "raw_return": 0.10508474576271191,
+      "net_return": 0.10208474576271191,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-09 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 61.5,
+      "exit_price": 65.2,
+      "holding_days": 26,
+      "raw_return": 0.060162601626016304,
+      "net_return": 0.0571626016260163,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-10 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 61.4,
+      "exit_price": 65.2,
+      "holding_days": 25,
+      "raw_return": 0.06188925081433232,
+      "net_return": 0.058889250814332314,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-11 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 62.7,
+      "exit_price": 65.2,
+      "holding_days": 24,
+      "raw_return": 0.03987240829346092,
+      "net_return": 0.03687240829346092,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-14 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 62.4,
+      "exit_price": 65.2,
+      "holding_days": 23,
+      "raw_return": 0.04487179487179494,
+      "net_return": 0.04187179487179494,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-15 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 61.4,
+      "exit_price": 65.2,
+      "holding_days": 22,
+      "raw_return": 0.06188925081433232,
+      "net_return": 0.058889250814332314,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-16 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 61.8,
+      "exit_price": 69.1,
+      "holding_days": 30,
+      "raw_return": 0.11812297734627827,
+      "net_return": 0.11512297734627827,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-17 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 62.2,
+      "exit_price": 69.1,
+      "holding_days": 29,
+      "raw_return": 0.11093247588424424,
+      "net_return": 0.10793247588424423,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-18 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 61.9,
+      "exit_price": 69.1,
+      "holding_days": 28,
+      "raw_return": 0.11631663974151851,
+      "net_return": 0.11331663974151851,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-21 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 61.3,
+      "exit_price": 69.1,
+      "holding_days": 27,
+      "raw_return": 0.12724306688417614,
+      "net_return": 0.12424306688417613,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-22 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 62.2,
+      "exit_price": 69.1,
+      "holding_days": 26,
+      "raw_return": 0.11093247588424424,
+      "net_return": 0.10793247588424423,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-23 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 62.1,
+      "exit_price": 69.1,
+      "holding_days": 25,
+      "raw_return": 0.11272141706924303,
+      "net_return": 0.10972141706924303,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-24 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 62.1,
+      "exit_price": 69.1,
+      "holding_days": 24,
+      "raw_return": 0.11272141706924303,
+      "net_return": 0.10972141706924303,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-25 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 62.0,
+      "exit_price": 69.1,
+      "holding_days": 23,
+      "raw_return": 0.11451612903225797,
+      "net_return": 0.11151612903225797,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-28 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 62.8,
+      "exit_price": 69.1,
+      "holding_days": 22,
+      "raw_return": 0.10031847133757958,
+      "net_return": 0.09731847133757958,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-29 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 61.0,
+      "exit_price": 69.1,
+      "holding_days": 21,
+      "raw_return": 0.13278688524590154,
+      "net_return": 0.12978688524590154,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-30 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 60.9,
+      "exit_price": 69.1,
+      "holding_days": 20,
+      "raw_return": 0.13464696223316908,
+      "net_return": 0.13164696223316907,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-07-31 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 60.2,
+      "exit_price": 69.1,
+      "holding_days": 19,
+      "raw_return": 0.14784053156146165,
+      "net_return": 0.14484053156146165,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    },
+    {
+      "signal_date": "2025-08-01 00:00:00",
+      "signal_type": "BUY",
+      "entry_price": 60.2,
+      "exit_price": 69.1,
+      "holding_days": 18,
+      "raw_return": 0.14784053156146165,
+      "net_return": 0.14484053156146165,
+      "success": "True",
+      "hit_stop_loss": "False",
+      "hit_take_profit": "False",
+      "original_score": 53.75,
+      "adjusted_score": 74.175,
+      "vn_context_notes": [
+        "Banking sector - higher weight due to market leadership",
+        "Foreign ownership target - increased institutional interest"
+      ]
+    }
+  ],
+  "performance_metrics": {
+    "total_signals": 42,
+    "successful_signals": 42,
+    "win_rate": 100.0,
+    "avg_return": 10.4,
+    "median_return": 10.88,
+    "std_return": 2.35,
+    "max_loss": 0,
+    "total_return": 6218.0,
+    "avg_holding_period": 24.8,
+    "sharpe_ratio": 4.42,
+    "buy_signals": 42,
+    "sell_signals": 0,
+    "buy_win_rate": 100.0,
+    "sell_win_rate": 0,
+    "risk_adjusted_return": 4.43
+  },
+  "data_quality": {
+    "total_days": 123,
+    "missing_data": "1",
+    "zero_volume_days": "0"
+  }
+}

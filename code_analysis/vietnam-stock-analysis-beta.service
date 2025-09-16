@@ -1,0 +1,15 @@
+[Unit]
+Description=Vietnam Stock Analysis Beta System
+After=network.target
+
+[Service]
+Type=simple
+User=codespace
+WorkingDirectory=/workspaces/BMAD-METHOD/code_analysis
+Environment=ENVIRONMENT=beta
+ExecStart=/workspaces/BMAD-METHOD/code_analysis/start_beta.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

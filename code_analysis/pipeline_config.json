@@ -1,0 +1,12 @@
+{
+  "database_path": "data/vietnam_stocks.db",
+  "update_schedule": "09:00",
+  "batch_size": 10,
+  "max_workers": 5,
+  "retry_attempts": 3,
+  "cache_ttl": 3600,
+  "alert_email": "admin@example.com",
+  "enable_signals": true,
+  "enable_comprehensive_analysis": true,
+  "data_retention_days": 365
+}
