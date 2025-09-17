@@ -1,0 +1,69 @@
+{
+  "alerts": [
+    {
+      "id": "PORTFOLIO_RISK_WARNING_1758096030",
+      "timestamp": "2025-09-17T08:00:30.030773",
+      "symbol": "PORTFOLIO",
+      "type": "RISK_WARNING",
+      "priority": "HIGH",
+      "message": "Portfolio risk (122.6%) exceeds limit",
+      "data": {
+        "type": "RISK_WARNING",
+        "symbol": "PORTFOLIO",
+        "risk_level": 1.2259436748473516,
+        "message": "Portfolio risk (122.6%) exceeds limit",
+        "warnings": [
+          "Portfolio risk (122.6%) exceeds limit (20.0%)",
+          "BID risk (122.6%) exceeds position limit (5.0%)",
+          "banking sector risk (122.6%) exceeds limit (12.0%)"
+        ],
+        "recommendations": {
+          "action": "Reduce position sizes",
+          "urgency": "High",
+          "specific_actions": [
+            "Consider reducing high-correlation positions",
+            "Rebalance sector allocations",
+            "Increase cash reserves"
+          ]
+        }
+      },
+      "recommendations": {
+        "action": "Reduce position sizes",
+        "urgency": "High",
+        "specific_actions": [
+          "Consider reducing high-correlation positions",
+          "Rebalance sector allocations",
+          "Increase cash reserves"
+        ]
+      },
+      "expiry": "2025-09-17T12:00:30.030773"
+    },
+    {
+      "id": "BID_RISK_WARNING_1758096030",
+      "timestamp": "2025-09-17T08:00:30.031350",
+      "symbol": "BID",
+      "type": "RISK_WARNING",
+      "priority": "HIGH",
+      "message": "BID position risk (122.6%) is high",
+      "data": {
+        "type": "RISK_WARNING",
+        "symbol": "BID",
+        "risk_level": 1.2259436748473516,
+        "message": "BID position risk (122.6%) is high",
+        "recommendations": {
+          "action": "Consider reducing position size",
+          "urgency": "Medium",
+          "target_risk": "5% or below"
+        }
+      },
+      "recommendations": {
+        "action": "Consider reducing position size",
+        "urgency": "Medium",
+        "target_risk": "5% or below"
+      },
+      "expiry": "2025-09-17T12:00:30.031350"
+    }
+  ],
+  "daily_count": 2,
+  "last_reset": "2025-09-17"
+}

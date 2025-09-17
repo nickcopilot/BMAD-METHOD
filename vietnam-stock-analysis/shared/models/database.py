@@ -300,6 +300,14 @@ class DatabaseManager:
             print(f"Error inserting stock {stock.symbol}: {e}")
             return False
 
+    def get_all_stocks(self) -> List[Dict[str, Any]]:
+        """Get all active stocks"""
+        with self.get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM stocks WHERE is_active = 1 ORDER BY symbol"
+            )
+            return [dict(row) for row in cursor.fetchall()]
+
     def get_stocks_by_sector(self, sector: str) -> List[Dict[str, Any]]:
         """Get all stocks in a specific sector"""
         with self.get_connection() as conn:
@@ -420,6 +428,153 @@ class DatabaseManager:
                     ORDER BY period DESC, created_at DESC
                 """)
             return [dict(row) for row in cursor.fetchall()]
+
+    # Portfolio Management Methods
+    def add_portfolio_position(self, stock_symbol: str, position_size: int, entry_price: float,
+                              entry_date: str = None, user_id: str = 'default') -> bool:
+        """Add a new position to portfolio"""
+        if entry_date is None:
+            entry_date = datetime.now().strftime('%Y-%m-%d')
+
+        try:
+            with self.get_connection() as conn:
+                # Get current EIC score if available
+                eic_cursor = conn.execute("""
+                    SELECT total_score FROM eic_scores
+                    WHERE stock_symbol = ?
+                    ORDER BY created_at DESC LIMIT 1
+                """, (stock_symbol,))
+                eic_result = eic_cursor.fetchone()
+                eic_score = eic_result[0] if eic_result else None
+
+                conn.execute("""
+                    INSERT INTO portfolio (user_id, stock_symbol, position_size, entry_price,
+                                         entry_date, eic_score_at_entry)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                """, (user_id, stock_symbol, position_size, entry_price, entry_date, eic_score))
+
+            return True
+        except sqlite3.Error as e:
+            print(f"Error adding portfolio position: {e}")
+            return False
+
+    def get_portfolio(self, user_id: str = 'default') -> List[Dict[str, Any]]:
+        """Get all portfolio positions for a user"""
+        with self.get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT p.*, s.name, s.sector
+                FROM portfolio p
+                JOIN stocks s ON p.stock_symbol = s.symbol
+                WHERE p.user_id = ?
+                ORDER BY p.created_at DESC
+            """, (user_id,))
+            return [dict(row) for row in cursor.fetchall()]
+
+    def get_portfolio_performance(self, user_id: str = 'default') -> Dict[str, Any]:
+        """Calculate portfolio performance with current prices"""
+        portfolio = self.get_portfolio(user_id)
+
+        if not portfolio:
+            return {
+                'total_value': 0,
+                'total_cost': 0,
+                'total_gain_loss': 0,
+                'total_gain_loss_pct': 0,
+                'positions': []
+            }
+
+        total_value = 0
+        total_cost = 0
+        position_details = []
+
+        for position in portfolio:
+            symbol = position['stock_symbol']
+            shares = position['position_size']
+            entry_price = position['entry_price']
+
+            # Get current price
+            current_price_data = self.get_latest_price(symbol)
+            current_price = current_price_data['close'] if current_price_data else entry_price
+
+            # Calculate position metrics
+            position_cost = shares * entry_price
+            position_value = shares * current_price
+            position_gain_loss = position_value - position_cost
+            position_gain_loss_pct = (position_gain_loss / position_cost) * 100 if position_cost > 0 else 0
+
+            total_cost += position_cost
+            total_value += position_value
+
+            position_details.append({
+                **position,
+                'current_price': current_price,
+                'position_cost': position_cost,
+                'position_value': position_value,
+                'gain_loss': position_gain_loss,
+                'gain_loss_pct': position_gain_loss_pct
+            })
+
+        total_gain_loss = total_value - total_cost
+        total_gain_loss_pct = (total_gain_loss / total_cost) * 100 if total_cost > 0 else 0
+
+        return {
+            'total_value': total_value,
+            'total_cost': total_cost,
+            'total_gain_loss': total_gain_loss,
+            'total_gain_loss_pct': total_gain_loss_pct,
+            'positions': position_details
+        }
+
+    def update_portfolio_position(self, position_id: int, position_size: int = None,
+                                 entry_price: float = None) -> bool:
+        """Update an existing portfolio position"""
+        try:
+            with self.get_connection() as conn:
+                updates = []
+                params = []
+
+                if position_size is not None:
+                    updates.append("position_size = ?")
+                    params.append(position_size)
+
+                if entry_price is not None:
+                    updates.append("entry_price = ?")
+                    params.append(entry_price)
+
+                if not updates:
+                    return False
+
+                params.append(position_id)
+                query = f"UPDATE portfolio SET {', '.join(updates)} WHERE id = ?"
+
+                conn.execute(query, params)
+                return True
+
+        except sqlite3.Error as e:
+            print(f"Error updating portfolio position: {e}")
+            return False
+
+    def remove_portfolio_position(self, position_id: int) -> bool:
+        """Remove a position from portfolio"""
+        try:
+            with self.get_connection() as conn:
+                conn.execute("DELETE FROM portfolio WHERE id = ?", (position_id,))
+                return True
+        except sqlite3.Error as e:
+            print(f"Error removing portfolio position: {e}")
+            return False
+
+    def get_latest_price(self, symbol: str) -> Optional[Dict[str, Any]]:
+        """Get the latest price data for a symbol"""
+        with self.get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT * FROM price_data
+                WHERE stock_symbol = ?
+                ORDER BY date DESC
+                LIMIT 1
+            """, (symbol,))
+            result = cursor.fetchone()
+            return dict(result) if result else None
 
 
 # Global database instance

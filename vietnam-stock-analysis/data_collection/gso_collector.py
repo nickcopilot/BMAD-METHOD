@@ -30,6 +30,11 @@ class GSOCollector:
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         })
+        # Disable SSL verification to handle certificate issues
+        self.session.verify = False
+        # Suppress SSL warnings
+        import urllib3
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     def get_gdp_data(self) -> List[EconomicIndicator]:
         """Collect GDP growth data from GSO"""
