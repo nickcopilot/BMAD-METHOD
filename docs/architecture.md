@@ -1,121 +1,108 @@
-# Vietnam Stock Analysis System v2.0 Fullstack Architecture Document
-
-**Document Version:** 2.0
-**Date:** 2025-09-15
-**Architect:** Winston
-**System:** Vietnam Stock Analysis System with YAGNI Optimization
-
----
+# Vietnam Stock Analysis System Architecture Document
 
 ## Introduction
 
-This document outlines the complete fullstack architecture for **Vietnam Stock Analysis System v2.0**, including backend systems, frontend implementation, and their integration. It serves as the single source of truth for AI-driven development, ensuring consistency across the entire technology stack.
+This document outlines the complete fullstack architecture for the Vietnam Stock Analysis System, including backend systems, frontend implementation, and their integration. It serves as the single source of truth for AI-driven development, ensuring consistency across the entire technology stack.
 
-This unified approach combines what would traditionally be separate backend and frontend architecture documents, streamlining the development process for your smart money detection system where Vietnamese market context, VSA/Wyckoff analysis, and real-time data processing are tightly integrated.
+This unified approach combines what would traditionally be separate backend and frontend architecture documents, streamlining the development process for modern fullstack applications where these concerns are increasingly intertwined.
 
-### Starter Template Analysis
+### Starter Template Assessment
 
-**Decision**: Greenfield project with financial technology architecture patterns optimized for Vietnamese market specialization rather than standard web app starters.
+**Decision**: Greenfield project with financial data platform optimization
 
-**Change Log**
+**Reasoning**: The system has unique requirements including real-time financial data processing (vnstock integration), economic indicator data collection (GSO.gov.vn), complex scoring algorithms (EIC framework), and sector-specific analysis for Vietnamese markets. While generic fintech starters exist, the domain-specific requirements justify a purpose-built architecture.
+
+### Change Log
 
 | Date | Version | Description | Author |
-|------|---------|-------------|--------|
-| 2025-09-15 | 1.0 | Initial architecture design with event-driven approach | Winston |
-| 2025-09-15 | 2.0 | YAGNI optimization - simplified from 12 services to 3 core services | Winston |
-
----
+|------|---------|-------------|---------|
+| 2025-09-17 | 1.0 | Initial architecture document | Winston (Architect) |
 
 ## High Level Architecture
 
 ### Technical Summary
 
-The Vietnam Stock Analysis System v2.0 employs a **simplified, cost-optimized architecture** focused on delivering core Vietnamese stock signal processing with VSA/Wyckoff analysis. The system uses **AWS serverless compute** with strategic simplification, **YAGNI principles** applied to reduce complexity from 12+ microservices to 3 core services, and **progressive enhancement** ensuring rapid MVP delivery. Core integration points include **vnstock API adapters** with simple retry logic, **Vietnamese context processing** for holiday/news integration, and **signal attribution tracking** for ROI measurement. The architecture prioritizes **rapid development** and **cost efficiency** ($50-200/month vs $2000+/month) while maintaining essential Vietnamese market specialization.
+The Vietnam Stock Analysis System employs a **Finance-First Data Pipeline Architecture** using Python and Streamlit for rapid development and deployment. The system follows an **automated data collection → processing → visualization** pattern optimized for individual investment decision-making. **Streamlit serves as both frontend framework and deployment platform**, eliminating the need for separate frontend/backend concerns while providing professional financial dashboards. **SQLite provides local data persistence** with easy backup and Excel integration capabilities. **Railway hosts the Python data collection services** while Streamlit Cloud handles the dashboard deployment, creating a **cost-effective, maintenance-light solution** that delivers comprehensive EIC scoring and sector analysis for Vietnamese markets.
 
 ### Platform and Infrastructure Choice
 
-**Platform:** AWS with Serverless Framework
-**Key Services:** Lambda (3 functions), DynamoDB (2 tables), ElastiCache Redis (single node), S3, SES
-**Deployment Host and Regions:** AWS ap-southeast-1 (Singapore) for low latency to Vietnamese markets
+**Platform:** Streamlit Cloud + Railway
+**Key Services:** Streamlit (dashboard), Railway (data collection), SQLite (storage), GitHub (deployment)
+**Deployment Host and Regions:** US/Singapore regions for optimal Vietnamese market data access
 
 ### Repository Structure
 
-**Structure:** Monorepo with simplified service modules
-**Monorepo Tool:** Nx (enterprise-grade, supports future expansion)
-**Package Organization:** 3 core services, shared types, simplified infrastructure
+**Structure:** Monorepo with Clear Separation
+**Monorepo Tool:** Simple folder structure (no complex tooling needed)
+**Package Organization:** Feature-based modules with shared utilities
 
 ```
-vietnam-stock-system/
-├── apps/
-│   ├── web-app/              # React PWA
-│   ├── stock-analyzer/       # Core analysis Lambda
-│   ├── user-service/         # User management Lambda
-│   └── data-service/         # Market data Lambda
-├── libs/
-│   ├── shared-types/         # TypeScript interfaces
-│   ├── vietnamese-utils/     # Market-specific utilities
-│   └── simple-config/        # Shared configuration
-└── infrastructure/           # AWS CDK definitions
+vietnam-stock-analysis/
+├── data_collection/          # Railway-deployed data jobs
+├── dashboard/               # Streamlit application
+├── shared/                  # Common utilities and models
+└── docs/                   # Documentation and analysis
 ```
 
 ### High Level Architecture Diagram
 
 ```mermaid
 graph TB
-    subgraph "User Layer"
-        PWA[PWA Mobile App]
-        WEB[Web Dashboard]
-        EMAIL[Email Alerts]
-        SMS[SMS Alerts]
+    subgraph "Data Sources"
+        VN[vnstock API]
+        GSO[GSO.gov.vn]
+        SBVN[State Bank Vietnam]
     end
 
-    subgraph "API Layer"
-        APIGW[API Gateway]
+    subgraph "Railway (Data Collection)"
+        DC[Data Collector Service]
+        DB[(SQLite Database)]
+        SCHED[Scheduler - Daily/Weekly]
     end
 
-    subgraph "Core Services (3 Only)"
-        ANALYZER[Stock Analyzer λ]
-        USER[User Service λ]
-        DATA[Data Service λ]
+    subgraph "Streamlit Cloud (Dashboard)"
+        DASH[Streamlit Dashboard]
+        EIC[EIC Scoring Engine]
+        VIZ[Financial Charts & Reports]
     end
 
-    subgraph "Data Layer"
-        DDB[DynamoDB]
-        REDIS[Redis Cache]
-        S3[S3 Static Data]
+    subgraph "User Interface"
+        WEB[Web Browser]
+        MOBILE[Mobile Browser]
+        EXCEL[Excel Export]
     end
 
-    subgraph "External"
-        VNSTOCK[vnstock API]
-        NEWS[VN News APIs]
-    end
+    VN --> DC
+    GSO --> DC
+    SBVN --> DC
 
-    PWA --> APIGW
-    WEB --> APIGW
-    APIGW --> ANALYZER
-    APIGW --> USER
-    APIGW --> DATA
+    DC --> DB
+    SCHED --> DC
 
-    ANALYZER --> DDB
-    USER --> DDB
-    DATA --> REDIS
-    DATA --> VNSTOCK
-    DATA --> NEWS
-    DATA --> S3
+    DB --> DASH
+    DASH --> EIC
+    EIC --> VIZ
 
-    USER --> EMAIL
-    USER --> SMS
+    VIZ --> WEB
+    VIZ --> MOBILE
+    DASH --> EXCEL
+
+    classDef dataSource fill:#e1f5fe
+    classDef processing fill:#f3e5f5
+    classDef interface fill:#e8f5e8
+
+    class VN,GSO,SBVN dataSource
+    class DC,EIC,SCHED processing
+    class WEB,MOBILE,EXCEL interface
 ```
 
 ### Architectural Patterns
 
-- **YAGNI-Driven Simplification:** Reduce complexity from microservices to 3 core services - _Rationale:_ Deliver 80% value with 20% complexity
-- **Serverless-First:** AWS Lambda for all compute with simple scaling - _Rationale:_ Cost optimization and reduced operational overhead
-- **Progressive Enhancement:** Mobile-first PWA with email/SMS alerts (no WebSocket complexity) - _Rationale:_ Users check signals periodically, not continuously
-- **Vietnamese Market Adapter:** Pluggable market-specific modules for future expansion - _Rationale:_ Enables future expansion while maintaining simplicity
-- **Simple Caching Strategy:** Single Redis node with basic TTL - _Rationale:_ Premature optimization avoided, can scale later
-
----
+- **ETL Pipeline Pattern:** Daily data extraction, transformation, and loading from Vietnamese sources - _Rationale:_ Financial data requires consistent, scheduled updates with data quality validation
+- **Dashboard-as-a-Service:** Streamlit provides immediate visualization without frontend development - _Rationale:_ Rapid iteration on financial metrics and KPIs without technical overhead
+- **Configuration-Driven Scoring:** EIC parameters stored in config files for easy modification - _Rationale:_ Finance expert can adjust scoring weights without code changes
+- **Event-Driven Updates:** Market close triggers, earnings announcements, economic releases - _Rationale:_ Investment decisions depend on timely data processing and alerts
+- **Modular Sector Analysis:** Separate processing modules for Securities, Banking, Real Estate, Steel - _Rationale:_ Each sector has unique metrics and data sources requiring specialized handling
 
 ## Tech Stack
 
@@ -123,753 +110,500 @@ graph TB
 
 | Category | Technology | Version | Purpose | Rationale |
 |----------|------------|---------|---------|-----------|
-| Frontend Language | TypeScript | 5.3+ | Type-safe frontend development | Critical for financial calculations and API contracts |
-| Frontend Framework | React | 18.2+ | PWA with basic real-time capabilities | Mature ecosystem, excellent PWA support |
-| UI Component Library | Ant Design | 5.12+ | Financial-focused component library | Pre-built charts, tables optimized for trading interfaces |
-| State Management | Zustand + TanStack Query | 4.4+ / 5.8+ | Client state + server state management | Lightweight, good for periodic data updates |
-| Backend Language | TypeScript | 5.3+ | Unified type system across stack | Shared types between frontend/backend, reduced errors |
-| Backend Framework | Serverless Framework | 3.38+ | AWS Lambda orchestration | Optimal for cost efficiency and simple scaling |
-| API Style | REST (no WebSocket) | HTTP/1.1 | Standard API with polling | Simpler than real-time, adequate for use case |
-| Database | DynamoDB | Latest | Simple NoSQL storage | Auto-scaling, cost-effective for MVP |
-| Cache | Redis (ElastiCache) | 7.0+ | Basic caching layer | Single node sufficient for MVP |
-| File Storage | S3 | Latest | Static data storage | Cost-effective, simple integration |
-| Authentication | AWS Cognito | Latest | User management + JWT tokens | Integrated with AWS ecosystem |
-| Frontend Testing | Vitest + Testing Library | 1.0+ / 14.0+ | Fast unit + integration tests | Faster than Jest, excellent React component testing |
-| Backend Testing | Jest | 29.7+ | Lambda function testing | Simple, proven approach |
-| E2E Testing | Playwright | 1.40+ | Basic user flow testing | Essential for financial applications |
-| Build Tool | Vite | 5.0+ | Fast development builds | Significantly faster than webpack |
-| Bundler | esbuild (via Vite) | 0.19+ | Production bundling | Fastest bundler, TypeScript native support |
-| IaC Tool | AWS CDK | 2.110+ | TypeScript infrastructure definition | Type-safe infrastructure, better than CloudFormation |
-| CI/CD | GitHub Actions | Latest | Automated testing + deployment | Free for public repos, excellent AWS integration |
-| Monitoring | CloudWatch | Latest | Basic system monitoring | Native AWS integration, sufficient for MVP |
-| Logging | CloudWatch Logs + Winston | Latest / 3.11+ | Simple structured logging | Essential for debugging |
-| CSS Framework | Tailwind CSS | 3.3+ | Utility-first responsive design | Rapid development, excellent mobile-first approach |
+| **Frontend Language** | Python | 3.11+ | Dashboard development | Streamlit is Python-native, aligns with vnstock and data science ecosystem |
+| **Frontend Framework** | Streamlit | 1.28+ | Interactive dashboards | Finance-friendly with built-in charts, no HTML/CSS required |
+| **UI Component Library** | Streamlit Components | Built-in | Charts and widgets | Plotly integration for financial charts, AgGrid for data tables |
+| **State Management** | Streamlit Session State | Built-in | User preferences and filters | Simple state management without Redux complexity |
+| **Backend Language** | Python | 3.11+ | Data processing and APIs | Consistent with frontend, vnstock compatibility |
+| **Backend Framework** | FastAPI | 0.104+ | Optional API layer | If API needed later, Python-native, auto-documentation |
+| **API Style** | Direct DB Access | N/A | Streamlit → SQLite | Streamlit can directly query database, no API needed initially |
+| **Database** | SQLite | 3.42+ | Local data storage | File-based, easy backup, Excel export, perfect for single-user |
+| **Cache** | Streamlit Cache | Built-in | Data and computation caching | @st.cache_data for expensive EIC calculations |
+| **File Storage** | Local Filesystem | N/A | Reports and exports | Simple file storage, easy Excel/CSV export |
+| **Authentication** | Streamlit Cloud Auth | Built-in | Basic access control | GitHub-based auth for deployment |
+| **Frontend Testing** | Pytest + Streamlit | 7.4+ | Component testing | Python-native testing framework |
+| **Backend Testing** | Pytest | 7.4+ | Data processing tests | Standard Python testing |
+| **E2E Testing** | Manual Testing | N/A | User workflow validation | Given Streamlit's simplicity, manual testing sufficient |
+| **Build Tool** | Python pip | 23+ | Dependency management | Standard Python package management |
+| **Bundler** | Streamlit | Built-in | App bundling | Streamlit handles bundling automatically |
+| **IaC Tool** | Railway Config | YAML | Infrastructure as code | Simple YAML config for Railway deployment |
+| **CI/CD** | GitHub Actions | N/A | Automated deployment | Free tier sufficient for our needs |
+| **Monitoring** | Streamlit Metrics | Built-in | Basic app monitoring | Built-in metrics, Railway monitoring for jobs |
+| **Logging** | Python logging | Built-in | Error tracking | Standard Python logging to files |
+| **CSS Framework** | Streamlit Theming | Built-in | Styling and responsive design | Built-in themes with custom CSS injection if needed |
 
----
+### Additional Finance-Specific Tools
+
+| Category | Technology | Version | Purpose | Rationale |
+|----------|------------|---------|---------|-----------|
+| **Vietnamese Data** | vnstock | 1.0+ | Stock market data | Primary data source for Vietnamese stocks |
+| **Economic Data** | requests + BeautifulSoup | 2.31+ / 4.12+ | GSO.gov.vn scraping | Web scraping for economic indicators |
+| **Financial Charts** | Plotly | 5.17+ | Candlestick and technical charts | Superior financial visualization |
+| **Data Analysis** | pandas | 2.1+ | Data manipulation | Essential for financial data processing |
+| **Numerical Computing** | numpy | 1.25+ | EIC calculations | Fast numerical operations |
+| **Scheduling** | APScheduler | 3.10+ | Automated data collection | Railway cron jobs for daily data updates |
+| **Excel Integration** | openpyxl | 3.1+ | Report generation | Export to Excel for further analysis |
 
 ## Data Models
 
-### Core Data Models (Simplified)
+### Stock
 
-#### **User**
+**Purpose:** Represents individual Vietnamese stocks across your 4 target sectors (Securities, Banking, Real Estate, Steel)
+
+**Key Attributes:**
+- symbol: string - Stock ticker (e.g., "VCB", "SSI", "VHM", "HPG")
+- name: string - Company full name in Vietnamese and English
+- sector: string - One of: "securities", "banking", "real_estate", "steel"
+- exchange: string - "HOSE", "HNX", or "UPCOM"
+- market_cap: float - Current market capitalization in VND
+- industry_group: string - Detailed industry classification
+- listing_date: date - IPO/listing date for historical context
+
+#### TypeScript Interface
 ```typescript
-interface User {
-  id: string;
-  email: string;
-  subscription: 'free' | 'premium';
-  preferences: SimplePreferences;
-  createdAt: Date;
-}
-
-interface SimplePreferences {
-  sectors: string[]; // ['Banking', 'RealEstate']
-  alertMethods: ('email' | 'sms')[];
-  riskLevel: 'conservative' | 'moderate' | 'aggressive';
-  timeframe: 'daily' | 'weekly';
+interface Stock {
+  symbol: string;
+  name: string;
+  name_en: string;
+  sector: 'securities' | 'banking' | 'real_estate' | 'steel';
+  exchange: 'HOSE' | 'HNX' | 'UPCOM';
+  market_cap: number;
+  industry_group: string;
+  listing_date: string; // ISO date
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
 }
 ```
 
-#### **MarketData**
+#### Relationships
+- Has many PriceData (daily price history)
+- Has many FinancialData (quarterly/annual reports)
+- Has many EICScores (calculated scores over time)
+
+### PriceData
+
+**Purpose:** Daily stock price and volume data from vnstock, essential for technical analysis and momentum scoring
+
+**Key Attributes:**
+- stock_symbol: string - Foreign key to Stock
+- date: date - Trading date
+- open: float - Opening price in VND
+- high: float - Highest price in VND
+- low: float - Lowest price in VND
+- close: float - Closing price in VND
+- volume: integer - Number of shares traded
+- value: float - Total trading value in VND
+- foreign_buy: float - Foreign investor purchases
+- foreign_sell: float - Foreign investor sales
+
+#### TypeScript Interface
 ```typescript
-interface MarketData {
-  symbol: string;
-  timestamp: Date;
-  timeframe: 'daily' | 'weekly';
-  price: {
-    open: number;
-    high: number;
-    low: number;
-    close: number;
-  };
+interface PriceData {
+  stock_symbol: string;
+  date: string; // ISO date
+  open: number;
+  high: number;
+  low: number;
+  close: number;
   volume: number;
-  indicators: {
-    atr: number;
-    relativeVolume: number;
-    trend: 'up' | 'down' | 'sideways';
-  };
+  value: number;
+  foreign_buy: number;
+  foreign_sell: number;
+  foreign_net: number; // calculated field
+  price_change: number; // calculated field
+  price_change_percent: number; // calculated field
 }
 ```
 
-#### **SimpleSignal**
+#### Relationships
+- Belongs to Stock
+- Used by EICScore calculations
+
+### FinancialData
+
+**Purpose:** Quarterly and annual financial statements for fundamental analysis, supporting company-level EIC scoring
+
+**Key Attributes:**
+- stock_symbol: string - Foreign key to Stock
+- period: string - "Q1-2024", "Q2-2024", "2023" format
+- period_type: string - "quarterly" or "annual"
+- revenue: float - Net revenue in billion VND
+- profit: float - Net profit in billion VND
+- total_assets: float - Total assets in billion VND
+- equity: float - Total equity in billion VND
+- debt: float - Total debt in billion VND
+- roe: float - Return on Equity percentage
+- roa: float - Return on Assets percentage
+- pe_ratio: float - Price-to-Earnings ratio
+- pb_ratio: float - Price-to-Book ratio
+- debt_equity: float - Debt-to-Equity ratio
+
+#### TypeScript Interface
 ```typescript
-interface SimpleSignal {
-  symbol: string;
-  timestamp: Date;
-  action: 'buy' | 'sell' | 'hold' | 'wait';
-  confidence: number; // 1-10 scale
-  reason: string; // Human readable explanation
-  targetPrice?: number;
-  stopLoss?: number;
-  vietnameseNote?: string; // "Tet holiday - low liquidity expected"
-  signalStrength: 'weak' | 'moderate' | 'strong';
+interface FinancialData {
+  stock_symbol: string;
+  period: string;
+  period_type: 'quarterly' | 'annual';
+  revenue: number;
+  profit: number;
+  total_assets: number;
+  equity: number;
+  debt: number;
+  roe: number;
+  roa: number;
+  pe_ratio: number;
+  pb_ratio: number;
+  debt_equity: number;
+  profit_margin: number; // calculated
+  asset_turnover: number; // calculated
+  report_date: string;
 }
 ```
 
-#### **SimplePortfolio**
+#### Relationships
+- Belongs to Stock
+- Used by EICScore calculations
+
+### EconomicIndicator
+
+**Purpose:** Vietnamese macroeconomic data from GSO.gov.vn and State Bank, supporting economy-level EIC scoring
+
+**Key Attributes:**
+- indicator_code: string - "GDP_GROWTH", "CPI_INFLATION", "INTEREST_RATE"
+- indicator_name: string - Human-readable name
+- period: string - "2024-Q1", "2024-03" format
+- value: float - Indicator value (percentage, absolute, or index)
+- unit: string - "percent", "billion_vnd", "index"
+- source: string - "GSO", "SBV", "MINISTRY_OF_FINANCE"
+- category: string - "growth", "inflation", "monetary", "fiscal"
+
+#### TypeScript Interface
 ```typescript
-interface SimplePortfolio {
-  userId: string;
-  positions: Array<{
-    symbol: string;
-    quantity: number;
-    averageCost: number;
-    currentValue: number;
-    signalBased: boolean; // Did they follow our signal?
-  }>;
-  totalValue: number;
-  totalReturn: number;
-  signalWinRate: number; // Only metric that matters
-  lastUpdated: Date;
+interface EconomicIndicator {
+  indicator_code: string;
+  indicator_name: string;
+  period: string;
+  value: number;
+  unit: string;
+  source: 'GSO' | 'SBV' | 'MINISTRY_OF_FINANCE';
+  category: 'growth' | 'inflation' | 'monetary' | 'fiscal';
+  release_date: string;
+  created_at: string;
 }
 ```
 
-#### **SimpleMarketContext**
+#### Relationships
+- Used by EICScore calculations
+- Independent of individual stocks
+
+### EICScore
+
+**Purpose:** Your calculated EIC (Economy-Industry-Company) scores over time, the core output of your analysis system
+
+**Key Attributes:**
+- stock_symbol: string - Foreign key to Stock
+- date: date - Calculation date
+- economy_score: float - Economy level score (0-10)
+- industry_score: float - Industry/sector level score (0-10)
+- company_score: float - Company fundamentals score (0-10)
+- total_score: float - Weighted total score (0-10)
+- economy_weight: float - Weight applied to economy score (default 0.30)
+- industry_weight: float - Weight applied to industry score (default 0.35)
+- company_weight: float - Weight applied to company score (default 0.35)
+- recommendation: string - "STRONG_BUY", "BUY", "HOLD", "SELL", "STRONG_SELL"
+
+#### TypeScript Interface
 ```typescript
-interface SimpleMarketContext {
-  isHoliday: boolean;
-  holidayType?: 'tet' | 'national' | 'bank';
-  liquidityWarning: boolean;
-  majorNews?: string; // One sentence summary
-  volumeExpectation: 'low' | 'normal' | 'high';
+interface EICScore {
+  stock_symbol: string;
+  date: string; // ISO date
+  economy_score: number;
+  industry_score: number;
+  company_score: number;
+  total_score: number;
+  economy_weight: number;
+  industry_weight: number;
+  company_weight: number;
+  recommendation: 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';
+  confidence_level: number; // 0-1 scale
+  calculation_version: string; // track algorithm changes
+  sector_rank: number; // Rank within sector (1 = best)
+  market_percentile: number; // Percentile across all stocks
+  score_change_7d: number; // Score change over 7 days
+  created_at: string;
 }
 ```
 
----
+#### Relationships
+- Belongs to Stock
+- References PriceData and FinancialData
+- References EconomicIndicator data
+
+### Portfolio
+
+**Purpose:** Track actual investment positions and correlate performance with EIC predictions for system validation
+
+#### TypeScript Interface
+```typescript
+interface Portfolio {
+  user_id: string;
+  stock_symbol: string;
+  position_size: number;      // Number of shares
+  entry_price: number;        // Average entry price
+  entry_date: string;
+  current_value: number;      // Calculated field
+  unrealized_pnl: number;     // Calculated field
+  eic_score_at_entry: number; // EIC score when position opened
+}
+```
+
+### Alert
+
+**Purpose:** Monitor EIC score changes and market events to notify of investment opportunities or risks
+
+#### TypeScript Interface
+```typescript
+interface Alert {
+  stock_symbol: string;
+  alert_type: 'SCORE_CHANGE' | 'PRICE_THRESHOLD' | 'VOLUME_SPIKE';
+  trigger_value: number;
+  current_value: number;
+  created_at: string;
+  is_read: boolean;
+}
+```
 
 ## API Specification
 
-### Simplified REST API
+### Internal Data Access (Streamlit ↔ SQLite)
 
-```yaml
-openapi: 3.0.0
-info:
-  title: Vietnam Stock Analysis System API (Simplified)
-  version: 2.0.0
-  description: YAGNI-optimized API for Vietnamese stock signals
+Since we're using Streamlit with direct SQLite access, we define clear **data access functions** that act as our internal API:
 
-paths:
-  /analyze/{symbol}:
-    get:
-      summary: Analyze stock and generate signal
-      parameters:
-        - name: symbol
-          in: path
-          required: true
-          schema:
-            type: string
-            example: "VCB"
-      responses:
-        '200':
-          description: Stock analysis signal
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SimpleSignal'
+#### Data Access Layer Functions
 
-  /portfolio:
-    get:
-      summary: Get user portfolio
-      responses:
-        '200':
-          description: User portfolio with performance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SimplePortfolio'
+```python
+# Stock Data Access
+def get_stocks_by_sector(sector: str) -> List[Stock]:
+    """Get all stocks in a specific sector"""
 
-  /portfolio/trade:
-    post:
-      summary: Record trade action
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                symbol:
-                  type: string
-                action:
-                  type: string
-                  enum: [buy, sell]
-                quantity:
-                  type: number
-                price:
-                  type: number
-      responses:
-        '200':
-          description: Trade recorded
+def get_stock_by_symbol(symbol: str) -> Optional[Stock]:
+    """Get single stock by symbol"""
 
-  /performance:
-    get:
-      summary: Get performance metrics
-      responses:
-        '200':
-          description: Simple performance metrics
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  totalReturn:
-                    type: number
-                  signalWinRate:
-                    type: number
-                  followedSignals:
-                    type: number
+# Price Data Access
+def get_latest_prices(symbols: List[str]) -> List[PriceData]:
+    """Get most recent price data for multiple stocks"""
 
-  /preferences:
-    post:
-      summary: Update user preferences
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SimplePreferences'
-      responses:
-        '200':
-          description: Preferences updated
+def get_price_history(symbol: str, start_date: date, end_date: date) -> List[PriceData]:
+    """Get historical price data for charting"""
+
+# EIC Score Access
+def get_current_eic_scores(sector: Optional[str] = None) -> List[EICScore]:
+    """Get latest EIC scores, optionally filtered by sector"""
+
+def calculate_eic_score(symbol: str, date: date) -> EICScore:
+    """Calculate new EIC score for given stock and date"""
+
+# Portfolio Management
+def get_portfolio_positions() -> List[Portfolio]:
+    """Get all current portfolio positions"""
+
+def add_position(symbol: str, shares: int, price: float) -> Portfolio:
+    """Add new position to portfolio"""
 ```
 
----
+### External API Integrations
+
+#### vnstock API Integration
+
+```python
+import vnstock as vn
+
+def fetch_stock_prices(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
+    """Fetch price data from vnstock"""
+
+def fetch_financial_data(symbol: str) -> dict:
+    """Fetch company financials from vnstock"""
+```
+
+**vnstock API Endpoints Used:**
+- `stock_historical_data(symbol, start, end)` - Daily price/volume data
+- `company_profile(symbol)` - Company basic information
+- `financial_ratio(symbol)` - Financial ratios and metrics
+- `foreign_investor_flows(symbol)` - Foreign investment data
+
+#### GSO.gov.vn Economic Data Integration
+
+```python
+import requests
+from bs4 import BeautifulSoup
+
+def fetch_gdp_data() -> dict:
+    """Scrape GDP growth data from GSO"""
+
+def fetch_inflation_data() -> dict:
+    """Scrape CPI inflation data from GSO"""
+```
+
+**GSO.gov.vn Endpoints:**
+- `https://gso.gov.vn/px-web-2/?theme=1` - GDP and economic growth
+- `https://gso.gov.vn/px-web-2/?theme=3` - Price indices and inflation
+
+#### Data Collection Workflow
+
+```python
+@scheduler.scheduled_job('cron', hour=18, minute=0, timezone='Asia/Ho_Chi_Minh')
+def daily_data_collection():
+    """Runs after Vietnam market close (15:00 + buffer)"""
+
+@scheduler.scheduled_job('cron', day_of_week='mon', hour=9, minute=0)
+def weekly_economic_update():
+    """Runs Monday mornings"""
+```
 
 ## Components
 
-### Core Services (3 Only - YAGNI Optimized)
+### Data Collection Service
 
-#### **Vietnam Stock Analyzer Service**
-**Responsibility:** Single service handling all signal processing with Vietnamese market context
-
-**Key Interfaces:**
-- Unified stock analysis with VSA + Wyckoff + Vietnamese context
-- Simple signal generation (buy/sell/hold with confidence)
-- Portfolio position tracking
-- Basic performance attribution
-
-**Dependencies:** vnstock API, simple Vietnamese context data
-
-**Technology Stack:** Single AWS Lambda function, DynamoDB table, basic caching
-
-```typescript
-interface VietnamStockAnalyzer {
-  // ONE METHOD TO RULE THEM ALL
-  analyzeStock(symbol: string, userId?: string): Promise<SimpleSignal>;
-
-  // SIMPLIFIED PORTFOLIO
-  getPortfolio(userId: string): Promise<SimplePortfolio>;
-  updatePosition(userId: string, trade: TradeUpdate): Promise<void>;
-
-  // BASIC PERFORMANCE
-  getPerformance(userId: string): Promise<SimplePerformance>;
-}
-```
-
-#### **User Management Service**
-**Responsibility:** Authentication, preferences, and alert delivery (email/SMS only)
+**Responsibility:** Automated collection and processing of Vietnamese market data from multiple sources (vnstock, GSO.gov.vn, State Bank Vietnam)
 
 **Key Interfaces:**
-- AWS Cognito authentication wrapper
-- User preferences management
-- Simple alert delivery (no WebSocket complexity)
-- Subscription management
+- `collect_daily_stock_data()` - Fetch price/volume data after market close
+- `collect_economic_indicators()` - Scrape GSO economic data weekly
+- `validate_data_quality()` - Ensure data integrity before storage
 
-**Dependencies:** AWS Cognito, AWS SES, AWS SNS
+**Dependencies:** vnstock library, requests/BeautifulSoup for scraping, SQLite database, APScheduler
 
-**Technology Stack:** AWS Lambda functions, DynamoDB for user data
+**Technology Stack:** Python 3.11, deployed on Railway with scheduled cron jobs
 
-```typescript
-interface UserManagementService {
-  // AUTHENTICATION
-  authenticateUser(token: string): Promise<User>;
+### EIC Scoring Engine
 
-  // PREFERENCES (SIMPLE)
-  updatePreferences(userId: string, prefs: SimplePreferences): Promise<void>;
-
-  // ALERTS (EMAIL/SMS ONLY)
-  sendSignalAlert(userId: string, signal: SimpleSignal): Promise<void>;
-  sendPerformanceUpdate(userId: string, performance: SimplePerformance): Promise<void>;
-}
-```
-
-#### **Vietnamese Market Data Service**
-**Responsibility:** Data ingestion, basic Vietnamese context, and caching
+**Responsibility:** Calculate Economy-Industry-Company scores using your proprietary weighting system and Vietnamese market-specific factors
 
 **Key Interfaces:**
-- vnstock API integration with simple retry logic
-- Vietnamese holiday calendar
-- Basic news impact scoring
-- Market data caching (simple Redis)
+- `calculate_economy_score(date)` - Process macro indicators into 0-10 score
+- `calculate_industry_score(sector, date)` - Sector-level analysis and scoring
+- `calculate_company_score(symbol, date)` - Individual stock fundamental analysis
+- `calculate_composite_eic(symbol, date)` - Weighted final score with recommendation
 
-**Dependencies:** vnstock API, basic news sources
+**Dependencies:** Data Collection Service output, FinancialData models, EconomicIndicator models
 
-**Technology Stack:** AWS Lambda for data processing, ElastiCache Redis (single node), S3 for static data
+**Technology Stack:** Pure Python with pandas/numpy for calculations, configurable weights stored in YAML files
 
-```typescript
-interface VietnameseMarketDataService {
-  // DATA INGESTION
-  getMarketData(symbol: string, timeframe: 'daily' | 'weekly'): Promise<MarketData>;
+### Dashboard Application
 
-  // VIETNAMESE CONTEXT (SIMPLIFIED)
-  getMarketContext(date: Date): Promise<SimpleMarketContext>;
-  checkHoliday(date: Date): Promise<HolidayInfo>;
+**Responsibility:** Interactive Streamlit web interface for EIC analysis, portfolio management, and investment decision support
 
-  // BASIC NEWS
-  getRecentNews(sector?: string): Promise<SimpleNews[]>;
-}
-```
+**Key Interfaces:**
+- `render_market_overview()` - Sector performance and top EIC scores
+- `render_stock_analysis()` - Deep dive into individual stock EIC breakdown
+- `render_portfolio_dashboard()` - Current positions and performance tracking
+- `render_alert_center()` - EIC score changes and threshold alerts
 
----
+**Dependencies:** EIC Scoring Engine results, Portfolio models, SQLite database
 
-## Deployment Architecture
+**Technology Stack:** Streamlit 1.28+, Plotly for financial charts, deployed on Streamlit Cloud
 
-### YAGNI Infrastructure
+### Portfolio Manager
 
-```yaml
-Production:
-  compute:
-    - lambda_functions: 3 (not 12+)
-    - memory: 512MB each (not 8GB)
+**Responsibility:** Track actual investment positions and correlate performance with EIC predictions for system validation
 
-  storage:
-    - dynamodb_tables: 2 (not 8+)
-    - s3_buckets: 1 (static data)
-    - redis: single node (not cluster)
+**Key Interfaces:**
+- `add_position(symbol, shares, price)` - Record new stock purchases
+- `calculate_portfolio_performance()` - Returns vs EIC predictions
+- `generate_attribution_report()` - Which EIC factors drove returns
 
-  cost: $50-200/month (not $2000-5000)
+**Dependencies:** Portfolio and Position models, current price data, EIC score history
 
-  regions: ap-southeast-1 only (not multi-region)
-  availability: single AZ (not multi-AZ)
+**Technology Stack:** Python with pandas for calculations, integrated into Streamlit dashboard
 
-Environments:
-  - Development: Local development with DynamoDB Local
-  - Staging: Minimal AWS stack for testing
-  - Production: Single-AZ deployment optimized for cost
-```
+### Alert System
 
-### Development Workflow
+**Responsibility:** Monitor EIC score changes and market events to notify of investment opportunities or risks
 
-#### Local Development Setup
+**Key Interfaces:**
+- `monitor_eic_changes()` - Detect significant score movements
+- `check_price_thresholds()` - Price-based alerts for positions
+- `generate_daily_summary()` - Morning briefing of overnight changes
 
-**Prerequisites:**
-```bash
-node >= 18
-npm >= 9
-aws-cli >= 2.0
-```
+**Dependencies:** EIC Scoring Engine, Price data, Alert configuration models
 
-**Initial Setup:**
-```bash
-git clone <repo>
-npm install
-npm run bootstrap
-aws configure
-```
+**Technology Stack:** Background Python processes, configurable thresholds
 
-**Development Commands:**
-```bash
-# Start all services locally
-npm run dev
+## Core Workflows
 
-# Start frontend only
-npm run dev:web
-
-# Start backend only
-npm run dev:api
-
-# Run tests
-npm run test
-```
-
-#### Environment Configuration
-
-**Required Environment Variables:**
-```bash
-# Frontend (.env.local)
-VITE_API_BASE_URL=http://localhost:3001
-VITE_COGNITO_USER_POOL_ID=us-east-1_xxx
-VITE_COGNITO_CLIENT_ID=xxx
-
-# Backend (.env)
-VNSTOCK_API_KEY=your_vnstock_key
-DYNAMODB_TABLE_PREFIX=dev_
-REDIS_ENDPOINT=localhost:6379
-
-# Shared
-NODE_ENV=development
-AWS_REGION=ap-southeast-1
-```
-
----
-
-## Security and Performance
-
-### Security Requirements
-
-**Frontend Security:**
-- CSP Headers: `default-src 'self'; script-src 'self' 'unsafe-inline'`
-- XSS Prevention: Input sanitization with DOMPurify
-- Secure Storage: JWT tokens in httpOnly cookies
-
-**Backend Security:**
-- Input Validation: Joi schema validation
-- Rate Limiting: API Gateway throttling (1000 req/min)
-- CORS Policy: Vietnamese domains only
-
-**Authentication Security:**
-- Token Storage: httpOnly cookies with secure flag
-- Session Management: AWS Cognito with 24-hour tokens
-- Password Policy: 8+ chars, mixed case, numbers
-
-### Performance Optimization
-
-**Frontend Performance:**
-- Bundle Size Target: < 500KB gzipped
-- Loading Strategy: Lazy loading for non-critical components
-- Caching Strategy: React Query with 5-minute cache
-
-**Backend Performance:**
-- Response Time Target: < 500ms for signals
-- Database Optimization: DynamoDB single-table design
-- Caching Strategy: Redis with 15-minute TTL
-
----
-
-## Testing Strategy
-
-### Testing Pyramid
-
-```
-      E2E Tests (Few)
-     /              \
-  Integration Tests (Some)
- /                        \
-Frontend Unit    Backend Unit
-   (Many)          (Many)
-```
-
-### Test Organization
-
-**Frontend Tests:**
-```
-apps/web-app/tests/
-├── unit/           # Component and hook tests
-├── integration/    # API integration tests
-└── e2e/           # Full user journeys
-```
-
-**Backend Tests:**
-```
-apps/stock-analyzer/tests/
-├── unit/           # Function tests
-├── integration/    # DynamoDB integration
-└── e2e/           # API endpoint tests
-```
-
-### Test Examples
-
-**Frontend Component Test:**
-```typescript
-import { render, screen } from '@testing-library/react';
-import { SignalCard } from '../SignalCard';
-
-test('displays signal with Vietnamese context', () => {
-  const signal = {
-    symbol: 'VCB',
-    action: 'buy',
-    confidence: 8,
-    vietnameseNote: 'Tet holiday warning'
-  };
-
-  render(<SignalCard signal={signal} />);
-
-  expect(screen.getByText('VCB')).toBeInTheDocument();
-  expect(screen.getByText('Tet holiday warning')).toBeInTheDocument();
-});
-```
-
-**Backend API Test:**
-```typescript
-import { analyzeStock } from '../analyzer';
-
-test('generates buy signal for strong VSA pattern', async () => {
-  const mockData = createMockMarketData('VCB', 'strong_volume');
-
-  const signal = await analyzeStock('VCB');
-
-  expect(signal.action).toBe('buy');
-  expect(signal.confidence).toBeGreaterThan(7);
-  expect(signal.reason).toContain('volume');
-});
-```
-
----
-
-## Coding Standards
-
-### Critical Fullstack Rules
-
-- **Type Sharing:** Always define types in libs/shared-types and import from there
-- **API Calls:** Never make direct HTTP calls - use the service layer
-- **Environment Variables:** Access only through config objects, never process.env directly
-- **Error Handling:** All API routes must use the standard error handler
-- **State Updates:** Never mutate state directly - use proper state management patterns
-- **Vietnamese Context:** Always check holiday status before processing signals
-- **Cost Awareness:** Monitor Lambda execution time and DynamoDB read/write units
-
-### Naming Conventions
-
-| Element | Frontend | Backend | Example |
-|---------|----------|---------|---------|
-| Components | PascalCase | - | `SignalCard.tsx` |
-| Hooks | camelCase with 'use' | - | `useVietnameseMarket.ts` |
-| API Routes | - | kebab-case | `/api/analyze-stock` |
-| Database Tables | - | snake_case | `user_portfolios` |
-| Signal Types | - | snake_case | `stopping_volume` |
-
----
-
-## Error Handling Strategy
-
-### Error Flow
+### Daily Market Analysis Workflow
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Frontend
-    participant API
-    participant Service
+    participant Dashboard
+    participant EIC_Engine
+    participant DB
+    participant Data_Collector
+    participant vnstock
 
-    User->>Frontend: Request signal
-    Frontend->>API: GET /analyze/VCB
-    API->>Service: analyzeStock()
-    Service-->>API: Error: vnstock timeout
-    API-->>Frontend: 500 with error details
-    Frontend-->>User: "Analysis temporarily unavailable"
+    Note over Data_Collector: 18:00 ICT - After VN Market Close
+    Data_Collector->>vnstock: Fetch daily prices for all tracked stocks
+    vnstock->>Data_Collector: Price/volume data
+    Data_Collector->>DB: Store price data
+
+    Data_Collector->>EIC_Engine: Trigger EIC recalculation
+    EIC_Engine->>DB: Get latest price + financial + economic data
+    EIC_Engine->>EIC_Engine: Calculate new EIC scores
+    EIC_Engine->>DB: Store updated EIC scores
+
+    Note over User: Next morning - Investment Analysis
+    User->>Dashboard: Open analysis dashboard
+    Dashboard->>DB: Get latest EIC scores & alerts
+    Dashboard->>User: Display overnight changes
 ```
 
-### Error Response Format
+### Portfolio Position Management Workflow
 
-```typescript
-interface ApiError {
-  error: {
-    code: string;
-    message: string;
-    vietnamese?: string; // Localized message
-    timestamp: string;
-    requestId: string;
-  };
-}
+```mermaid
+sequenceDiagram
+    participant User
+    participant Dashboard
+    participant Portfolio_Mgr
+    participant EIC_Engine
+    participant DB
+
+    User->>Dashboard: Add new position (VCB, 1000 shares, 85,000 VND)
+    Dashboard->>Portfolio_Mgr: create_position()
+    Portfolio_Mgr->>DB: Get current EIC score for VCB
+    Portfolio_Mgr->>DB: Store position with entry EIC score
+
+    Note over User: Daily Portfolio Review
+    User->>Dashboard: Check portfolio performance
+    Dashboard->>Portfolio_Mgr: get_portfolio_with_alerts()
+    Portfolio_Mgr->>DB: Get positions + current prices + alerts
+    Dashboard->>User: Portfolio with performance attribution
 ```
 
-### Frontend Error Handling
+### New Stock Discovery Workflow
 
-```typescript
-const useStockAnalysis = (symbol: string) => {
-  return useQuery({
-    queryKey: ['analysis', symbol],
-    queryFn: () => analyzeStock(symbol),
-    retry: (failureCount, error) => {
-      // Don't retry on authentication errors
-      if (error.status === 401) return false;
-      return failureCount < 3;
-    },
-    onError: (error) => {
-      toast.error(
-        error.vietnamese ||
-        error.message ||
-        'Phân tích tạm thời không khả dụng'
-      );
-    }
-  });
-};
-```
+```mermaid
+sequenceDiagram
+    participant User
+    participant Dashboard
+    participant EIC_Engine
+    participant DB
 
-### Backend Error Handling
+    User->>Dashboard: Open stock screener
+    Dashboard->>DB: Get all current EIC scores
+    Dashboard->>User: Stock ranking by total EIC score
 
-```typescript
-export const errorHandler = (error: Error, event: APIGatewayEvent) => {
-  const requestId = event.requestContext.requestId;
+    User->>Dashboard: Filter: EIC > 8.0 AND Sector = Real Estate
+    Dashboard->>DB: Query filtered stocks
+    Dashboard->>User: Top real estate opportunities
 
-  logger.error('API Error', {
-    error: error.message,
-    stack: error.stack,
-    requestId,
-    path: event.path
-  });
-
-  if (error instanceof ValidationError) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({
-        error: {
-          code: 'VALIDATION_ERROR',
-          message: error.message,
-          vietnamese: 'Dữ liệu không hợp lệ',
-          timestamp: new Date().toISOString(),
-          requestId
-        }
-      })
-    };
-  }
-
-  // Generic error response
-  return {
-    statusCode: 500,
-    body: JSON.stringify({
-      error: {
-        code: 'INTERNAL_ERROR',
-        message: 'Internal server error',
-        vietnamese: 'Lỗi hệ thống tạm thời',
-        timestamp: new Date().toISOString(),
-        requestId
-      }
-    })
-  };
-};
+    User->>Dashboard: Analyze specific stock
+    Dashboard->>EIC_Engine: get_stock_analysis()
+    EIC_Engine->>Dashboard: Complete analysis package
+    Dashboard->>User: Stock analysis with EIC breakdown
 ```
 
 ---
 
-## Monitoring and Observability
-
-### Monitoring Stack
-
-- **Frontend Monitoring:** CloudWatch RUM for user experience metrics
-- **Backend Monitoring:** CloudWatch metrics for Lambda performance
-- **Error Tracking:** CloudWatch Logs with structured logging
-- **Performance Monitoring:** CloudWatch dashboards with cost tracking
-
-### Key Metrics
-
-**Frontend Metrics:**
-- Page load time
-- Signal display latency
-- User interaction success rate
-- Error rate by page
-
-**Backend Metrics:**
-- Lambda execution duration
-- DynamoDB read/write capacity
-- vnstock API success rate
-- Signal generation latency
-- Cost per signal generated
-
-**Business Metrics:**
-- Signal accuracy (win rate)
-- User retention
-- Revenue per user
-- Support ticket volume
-
----
-
-## Implementation Phases
-
-### Phase 1 (MVP - 2 weeks)
-**Goal:** Basic signal generation with Vietnamese context
-
-**Deliverables:**
-- Single Lambda for stock analysis
-- Basic VSA signal generation
-- Simple holiday calendar integration
-- Email alerts for signals
-- Basic portfolio tracking
-
-**Success Criteria:**
-- Generate signals for 50+ Vietnamese stocks
-- 60%+ signal accuracy
-- 5+ active users testing
-
-### Phase 2 (Growth - 4 weeks)
-**Goal:** Enhanced signals and user experience
-
-**Deliverables:**
-- Improved VSA + basic Wyckoff patterns
-- SMS alerts integration
-- Better Vietnamese context (news integration)
-- Portfolio performance tracking
-- User preference management
-
-**Success Criteria:**
-- 70%+ signal accuracy
-- 50+ monthly active users
-- $10+ revenue per user
-
-### Phase 3 (Scale - 8 weeks)
-**Goal:** Production-ready with advanced features
-
-**Deliverables:**
-- Advanced technical indicators
-- Multi-timeframe analysis
-- Real-time features (if needed based on user feedback)
-- Mobile app optimization
-- Automated backtesting
-
-**Success Criteria:**
-- 1000+ users
-- 75%+ signal accuracy
-- Positive unit economics
-
----
-
-## Cost Optimization Strategy
-
-### Current Cost Structure (Estimated)
-
-```yaml
-Monthly AWS Costs:
-  Lambda (3 functions): $20-50
-  DynamoDB (2 tables): $10-30
-  ElastiCache Redis: $15-25
-  S3 Storage: $5-10
-  API Gateway: $10-20
-  CloudWatch: $5-15
-  SES/SNS: $5-10
-
-Total: $70-160/month (target: <$200)
-
-Cost per user (at 100 users): $0.70-1.60
-Cost per signal: $0.01-0.05
-```
-
-### Cost Monitoring
-
-- CloudWatch billing alerts at $100, $150, $200
-- Daily cost reports via email
-- DynamoDB auto-scaling to prevent overages
-- Lambda memory optimization based on actual usage
-
----
-
-## YAGNI Decisions Made
-
-### What We're NOT Building (Initially)
-
-❌ **Real-time WebSockets** → 15-minute polling sufficient
-❌ **Complex Event Sourcing** → Basic CRUD operations
-❌ **Microservices Architecture** → 3 services maximum
-❌ **Multi-region Deployment** → Single region (Singapore)
-❌ **Advanced Technical Indicators** → Basic VSA + moving averages
-❌ **Sophisticated ML Models** → Rule-based signal generation
-❌ **Multi-tenant SaaS** → Single-tenant initially
-❌ **Advanced Analytics Dashboard** → Basic performance metrics
-❌ **Social Trading Features** → Individual analysis only
-❌ **API Rate Limiting** → AWS API Gateway throttling sufficient
-
-### Evidence-Based Development Plan
-
-**Success Metrics That Matter:**
-- User retention (>40% weekly retention)
-- Signal accuracy (>60% win rate)
-- Revenue per user (>$10/month)
-- User engagement (>5 minutes per session)
-
-**Scaling Triggers:**
-- IF >1000 users → Add real-time features
-- IF >70% accuracy → Add advanced indicators
-- IF >$50K revenue → Add multi-region deployment
-- IF user requests → Add social features
-
----
-
-*Architecture designed for Vietnam Stock Analysis System v2.0 with YAGNI optimization principles*
+*This architecture document provides the foundation for developing a comprehensive Vietnamese stock analysis system optimized for individual investment decision-making using the EIC framework.*
