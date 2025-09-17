@@ -1,0 +1,37 @@
+# Vietnam Stock Analysis System Dependencies
+# Based on architecture document tech stack
+
+# Core Framework
+streamlit>=1.28.0
+
+# Data Analysis & Processing
+pandas>=2.1.0
+numpy>=1.25.0
+
+# Financial Data & Charts
+plotly>=5.17.0
+vnstock>=1.0.0
+
+# Web Scraping (for GSO data)
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# Database - sqlite3 is built into Python
+
+# Scheduling (for future automation)
+APScheduler>=3.10.0
+
+# Excel Integration
+openpyxl>=3.1.0
+
+# Testing
+pytest>=7.4.0
+
+# Configuration
+PyYAML>=6.0.0
+
+# Data Validation
+pydantic>=2.0.0
+
+# Date/Time handling
+python-dateutil>=2.8.0
