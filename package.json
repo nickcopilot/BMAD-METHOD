@@ -72,7 +72,7 @@
     ]
   },
   "dependencies": {
-    "@anthropic-ai/claude-code": "^1.0.117",
+    "@anthropic-ai/claude-code": "^1.0.123",
     "@kayvan/markdown-tree-parser": "^1.6.1",
     "chalk": "^4.1.2",
     "commander": "^14.0.0",
